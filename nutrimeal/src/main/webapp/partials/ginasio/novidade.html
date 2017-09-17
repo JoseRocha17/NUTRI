@@ -1,0 +1,38 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div></div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<img ng-if="novidade.foto" class="imgNovidade"
+					ng-src="data:image/jpeg;base64,{{novidade.foto}}"
+					alt="Exercicio foto" />
+			</div>
+			<div class="col-sm-6" id="novidadeColumnTitulo">{{novidade.titulo}}</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6" id="novidadeColumnData">{{novidade.data|
+				date: 'dd-MM-yyyy'}}</div>
+			<div class="col-sm-6" id="novidadeColumnBreveDescricao">{{novidade.brevedesc}}</div>
+		</div>
+		<div class="row">
+
+			<div class="col-sm-12" id="novidadeColumnDescricao"></div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-12" id="novidadeColumnDescricao">Detalhes:
+				{{novidade.descricao}}</div>
+
+		</div>
+
+	</div>
+</body>

@@ -1,0 +1,122 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div></div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<img ng-if="novidade.foto" class="imgNovidade"
+					ng-src="data:image/jpeg;base64,{{novidade.foto}}"
+					alt="Exercicio foto" />
+			</div>
+			<div class="col-sm-6" id="novidadeColumnTitulo">{{novidade.titulo}}</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6" id="novidadeColumnData">{{novidade.data|
+				date: 'dd-MM-yyyy'}}</div>
+			<div class="col-sm-6" id="novidadeColumnBreveDescricao">{{novidade.brevedesc}}</div>
+		</div>
+		<div class="row">
+
+			<div class="col-sm-12" id="novidadeColumnDescricao"></div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-12" id="novidadeColumnDescricao">Detalhes:
+				{{novidade.descricao}}</div>
+
+		</div>
+
+		<button ng-click="toggleModalPhoto()" class="btn btn-info">
+			<i class="fa fa-file-image-o" aria-hidden="true"></i> Inserir Foto
+		</button>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Alterar
+		</button>
+	</div>
+
+	<modal title="Alterar Novidade" visible="showModal">
+	<form role="form" name="novidadeForm">
+
+		<div class="form-group">
+			<label for="titulo">Titulo</label> <input type="text"
+				name="tituloForm" class="form-control" ng-model="novidade.titulo"
+				id="titulo" placeholder="Coloque o nome do atributo"
+				ng-required="true" />
+
+			<div ng-show="novidadeForm.tituloForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Titulo da Novidade</p>
+			</div>
+		</div>
+
+		<div ng-show="novidadeForm.tituloForm.$valid" class="form-group">
+			<label for="brevedesc">Breve Descricao</label> <input type="text"
+				name="breveDescForm" class="form-control"
+				ng-model="novidade.brevedesc" id="brevedesc"
+				placeholder="Coloque o nome do atributo" ng-required="true" />
+
+			<div ng-show="novidadeForm.breveDescForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique uma Breve Descrição</p>
+			</div>
+		</div>
+
+		<div ng-show="novidadeForm.breveDescForm.$valid" class="form-group">
+			<label for="descricao">Descricao</label> <input type="text"
+				name="descForm" class="form-control" ng-model="novidade.descricao"
+				id="descricao" placeholder="Coloque o nome do atributo"
+				ng-required="true" />
+
+			<div ng-show="novidadeForm.descForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique uma Descrição</p>
+			</div>
+		</div>
+
+		<div ng-show="novidadeForm.descForm.$valid" class="form-group">
+			<label for="data">Data da Novidade</label> <input type="date" format-date
+				name="dataForm" class="form-control" ng-model="novidade.data"
+				id="data" placeholder="Coloque a data para este perfil" />
+
+			<div ng-show="novidadeForm.dataForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique uma Data da Novidade</p>
+			</div>
+		</div>
+
+		<button ng-disabled="novidadeForm.$invalid"
+			ng-click="updateNovidade(novidade)" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Modificar
+		</button>
+
+		<button type="button" class="btn btn-danger" ng-click="close()">
+			<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+		</button>
+	</form>
+	</modal>
+	<div>
+		<modal title="Foto do Exercicio" visible="showModalPhoto">
+		<form id="form2" enctype="multipart/form-data" action="addphoto"
+			method="post">
+			Selecione a foto do exercicio <br /> <input type="hidden"
+				id="novidade" name="novidade" value="novidade" /> <br /> <input
+				type="hidden" id="id" name="id" value="{{novidade.id}}"> <br />
+			<input class="btn btn-default" type="file" name="photo"
+				ng-model="novidade.photo" /> <br />
+			<button class="btn btn-default" type="submit">
+				<i class="fa fa-file-image-o" aria-hidden="true"></i> Adicionar Foto
+			</button>
+		</form>
+		</modal>
+	</div>
+
+</body>

@@ -1,0 +1,83 @@
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/options.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/angular-md5.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Opções do Utilizador</h1>
+	</header>
+	<br />
+	<hr />
+	<div ng-controller="PasswordUpdateController">
+		<form role="form" name="passwordForm" ng-controller="md5Controller">
+			<br />
+			<div class="form-group">
+				<label for="oldPassword">Password atual</label> <input
+					type="password" ng-model="person.oldPassword" class="form-control"
+					name="oldPassword" ng-required="true" placeholder="Insira password" />
+			</div>
+			<div
+				ng-show="passwordForm.oldPassword.$invalid && passwordForm.oldPassword.$dirty || conversion != profile.passwd && conversion != profile.passwd.$dirty"
+				class="alert alert-danger">
+				<p class="alertas">Por favor, insira a sua password atual.</p>
+			</div>
+			<div class="form-group">
+				<label for="newPassword">Password nova</label> <input
+					type="password" ng-model="person.newPassword" class="form-control"
+					name="newPassword" ng-required="true"
+					placeholder="Insira nova password" />
+			</div>
+			<div
+				ng-show="passwordForm.newPassword.$invalid && passwordForm.newPassword.$dirty"
+				class="alert alert-danger">
+				<p class="alertas">A password tem no minimo 6 digitos.</p>
+			</div>
+			<div class="form-group">
+				<label for="confirm_password">Confirmar nova password</label> <input
+					type="password" ng-model="person.passConf" class="form-control"
+					name="confirm_password" placeholder="Confirme password"
+					ng-required="true" required
+					data-password-verify="person.newPassword" />
+			</div>
+			<div
+				ng-show="passwordForm.confirm_password.$invalid && passwordForm.confirm_password.$dirty"
+				class="alert alert-danger">
+				<p class="alertas">Por favor coloque as passwords iguais!</p>
+			</div>
+			<button
+				ng-disabled="passwordForm.$invalid || conversion != profile.passwd"
+				ng-click="updatePassword(profile.email, person.oldPassword, person.newPassword)"
+				class="btn btn-default">
+				<i class="fa fa-check" aria-hidden="true"></i> Concluir
+			</button>
+			<button type="button" class="btn btn-default" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+
+		<!-- 	Modal Mudar Password-->
+		<modal visible="showModalUpdate">
+
+		<form>
+			<div>
+				<div class="form-group">
+					<label id="Apagar"><h1>Password Modificada com
+							Sucesso!</h1></label>
+				</div>
+
+			</div>
+			<button type="button" class="btn btn-success"
+				ng-click="closeUpdate()">
+				<i class="fa fa-times" aria-hidden="true"></i> Ok
+			</button>
+		</form>
+		</modal>
+	</div>
+
+
+
+</body>

@@ -1,0 +1,150 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Objetivos do Utilizador</h1>
+	</header>
+	<div class="table-responsive">
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="0" width="100%" ng-model="objetivosList">
+
+			<thead>
+				<tr>
+					<th>Data</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr
+					ng-repeat="objetivo in objetivosList">
+					<td>{{objetivo.data | date: 'dd-MM-yyyy'}}</td>
+
+					<td><a class="btn btn-info"
+						ng-click="editObjetivoUser(objetivo.id)"> <i
+							class="fa fa-search-plus" aria-hidden="true"></i> Ver Objetivo
+					</a> <a class="btn btn-warning" ng-click="deleteObjetivo(objetivo.id)">
+							<i class="fa fa-trash" aria-hidden="true"></i> Apagar
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<hr />
+	<div>
+		<a href="#/main" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+		</button>
+		<modal title="Adicionar Objetivo" visible="showModal">
+		<form role="form" name="objetivosForm">
+
+			<div class="form-group">
+				<label for="peso">Peso (kg)</label> <input type="number" step="0.01"
+					class="form-control" ng-model="objetivo.peso" id="peso"
+					name="pesoForm"
+					placeholder="Coloque o peso que pretende atingir [0.0]"
+					ng-required="true" />
+
+				<div ng-show="objetivosForm.pesoForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Peso</p>
+				</div>
+			</div>
+
+			<div ng-show="objetivosForm.pesoForm.$valid" class="form-group">
+				<label for="pescoco">Pescoco (cm)</label> <input type="number"
+					step="0.01" class="form-control" ng-model="objetivo.pescoco"
+					id="pescoco" name="pescocoForm"
+					placeholder="Coloque a largura de pescoço que deseja atingir [0.0]"
+					ng-required="true" />
+
+				<div ng-show="objetivosForm.pescocoForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Largura do Pescoço</p>
+				</div>
+			</div>
+
+			<div ng-show="objetivosForm.pescocoForm.$valid" class="form-group">
+				<label for="cintura">Cintura (cm)</label> <input type="number"
+					step="0.01" class="form-control" ng-model="objetivo.cintura"
+					id="cintura" name="cinturaForm"
+					placeholder="Coloque a largura de cintura que deseja atingir [0.0]"
+					ng-required="true" />
+
+				<div ng-show="objetivosForm.cinturaForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Largura da Cintura</p>
+				</div>
+			</div>
+
+			<div ng-show="objetivosForm.cinturaForm.$valid" class="form-group">
+				<label for="quadris">Quadris (cm)</label> <input type="number"
+					step="0.01" class="form-control" ng-model="objetivo.quadris"
+					id="quadris" name="quadrisForm"
+					placeholder="Coloque a largura de quadris que deseja atingir [0.0]"
+					ng-required="true" />
+
+				<div ng-show="objetivosForm.quadrisForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Largura dos Quadris</p>
+				</div>
+			</div>
+
+			<div ng-show="objetivosForm.quadrisForm.$valid" class="form-group">
+				<label for="data">Data em que espera alcançar os resultados</label>
+				<input type="date" class="form-control" ng-model="objetivo.data"
+					id="data" name="dataForm"
+					placeholder="Coloque a data em que deseja atingir os objetivos" />
+
+				<div ng-show="objetivosForm.dataForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Data para a Realização
+						do Objetivo Proposto</p>
+				</div>
+			</div>
+
+			<input type="hidden" ng-model="objetivo.user" id="profile"
+				value="{{profile.email}}" />
+
+			<button ng-disabled="objetivosForm.$invalid"
+				ng-click="createNewObjetivoUser(objetivo, profile.email)"
+				class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+
+		<!-- 	Modal Apagar Objetivo -->
+		<modal visible="showModalApagar" id="modalApagar">
+
+		<form>
+			<div>
+				<div class="form-group">
+					<label id="Apagar"><h1>Objetivo Proposto Excluido com
+							Sucesso!</h1></label>
+				</div>
+
+			</div>
+			<button type="button" class="btn btn-success"
+				ng-click="closeApagar()">
+				<i class="fa fa-times" aria-hidden="true"></i> Ok
+			</button>
+		</form>
+		</modal>
+	</div>
+	</div>
+
+
+</body>

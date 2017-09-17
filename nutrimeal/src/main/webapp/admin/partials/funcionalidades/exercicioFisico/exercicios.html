@@ -1,0 +1,138 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Exercicio Fisico</h1>
+	</header>
+	<div class="table-responsive">
+		<input class="form-control" type="text" ng-model="searchCriteria"
+			placeholder="Que exercicio deseja procurar?" />
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="0" width="100%" ng-model="exercicioList">
+			<thead>
+				<tr>
+					<th><a href="" ng-click="orderBy('nome')">Nome</a></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr ng-repeat="exercicio in exercicioList | filter: searchCriteria">
+					<td>{{exercicio.nome}}</td>
+
+					<td><a class="btn btn-info"
+						ng-click="editExercicio(exercicio.id)"> <i
+							class="fa fa-search-plus" aria-hidden="true"></i> Ver Exercicio
+					</a> <a class="btn btn-warning"
+						ng-click="deleteExercicio(exercicio.id)"> <i
+							class="fa fa-trash" aria-hidden="true"></i> Apagar
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<hr />
+	<div>
+		<a href="#/main" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+		</button>
+		<modal title="Adicionar Exercicio" visible="showModal">
+		<form role="form" name="exercicioForm">
+
+			<div class="form-group">
+				<label for="nome">Nome</label> <input type="text" name="nomeForm"
+					class="form-control" ng-model="exercicio.nome" id="nome"
+					placeholder="Coloque o nome do exercicio" ng-required="true" />
+
+
+				<div ng-show="exercicioForm.nomeForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Nome do Exercicio</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="exercicioForm.nomeForm.$valid">
+				<label for="exercicio.tipo">Tipo de Exercicio</label> <select
+					name="tipoForm" ng-model="exercicio.tipo" ng-required="true">
+					<option value="Cardiovascular">Cardiovascular</option>
+					<option value="Treino Musculação">Treino de Musculação</option>
+				</select>
+
+				<div ng-show="exercicioForm.tipoForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Tipo de Exercicio</p>
+				</div>
+			</div>
+
+			<div ng-show="exercicioForm.tipoForm.$valid">
+				<label for="descricao">Descricao</label>
+				<div class="form-group">
+
+					<textarea ng-required="true" name="descricaoForm"
+						class="input-xlarge" ng-model="exercicio.descricao" id="descricao"
+						placeholder="Coloque uma descrição do exercicio" class="form-control"
+						style="resize: none" rows="10" cols="50" >
+					</textarea>
+					<div ng-show="exercicioForm.descricaoForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique uma Breve Descrição do
+							Exercicio</p>
+					</div>
+				</div>
+
+
+			</div>
+
+
+
+
+			<!-- 			<label for="descricao">Descricao</label> <input type="text" -->
+			<!-- 				name="descricaoForm" class="form-control" -->
+			<!-- 				ng-model="exercicio.descricao" id="descricao" -->
+			<!-- 				placeholder="Coloque o nome do exercicio" ng-required="true" /> -->
+
+			<!-- 			<div ng-show="exercicioForm.descricaoForm.$invalid " -->
+			<!-- 				class="alert alert-danger"> -->
+			<!-- 				<p class="alertas">Por Favor Indique uma Breve Descrição do -->
+			<!-- 					Exercicio</p> -->
+			<!-- 			</div> -->
+			<!-- 	</div> -->
+
+			<button ng-disabled="exercicioForm.$invalid"
+				ng-click="createNewExercicio(exercicio)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+
+
+		<!-- 	Modal Apagar Exercicio -->
+		<modal visible="showModalApagar" id="modalApagar">
+
+		<form>
+			<div>
+				<div class="form-group">
+					<label id="Apagar"><h1>Exercicio Excluido com Sucesso!</h1></label>
+				</div>
+
+			</div>
+			<button type="button" class="btn btn-success"
+				ng-click="closeApagar()">
+				<i class="fa fa-times" aria-hidden="true"></i> Ok
+			</button>
+		</form>
+		</modal>
+	</div>
+</body>

@@ -1,0 +1,33 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<h1>Admnistração da Plataforma</h1>
+
+	<div id="ImagemLogo">
+		<img class="logo" src="/resources/images/gym.png"> <img
+			class="logo" src="/resources/images/gym3.png">
+	</div>
+
+	<script type="text/javascript">
+		var myIndex = 0;
+		carousel();
+
+		function carousel() {
+			var y;
+			var x = document.getElementsByClassName("logo");
+			for (y = 0; y < x.length; y++) {
+				x[y].style.display = "none";
+			}
+			myIndex++;
+			if (myIndex > x.length) {
+				myIndex = 1
+			}
+			x[myIndex - 1].style.display = "block";
+			setTimeout(carousel, 5000);
+		}
+	</script>
+
+</body>

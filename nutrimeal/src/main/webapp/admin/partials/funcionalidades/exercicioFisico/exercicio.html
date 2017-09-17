@@ -1,0 +1,120 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Detalhes do Exercicio</h1>
+	</header>
+	<img ng-if="exercicio.foto" class="imgAlimento"
+		ng-src="data:image/jpeg;base64,{{exercicio.foto}}"
+		alt="Exercicio foto" />
+	<form ng-if="exercicio.foto" id="exercicioPhoto"
+		enctype="multipart/form-data" action="addphoto" method="post">
+		<input type="hidden" id="removerAlimentoFoto"
+			name="removerExercicioFoto" value="removerExercicioFoto" /> <input
+			type="hidden" id="nome" name="nome" value="{{exercicio.id}}">
+		<button type="submit" class="btn">
+			<i class="fa fa-times" aria-hidden="true"></i>Apagar Foto
+		</button>
+	</form>
+
+	<table class="table exercicioTable">
+
+
+		<tr>
+			<th>Nome</th>
+			<td>{{exercicio.nome}}</td>
+		</tr>
+		<tr>
+			<th>Tipo</th>
+			<td>{{exercicio.tipo}}</td>
+		</tr>
+		<tr>
+			<th>Descricao</th>
+			<td>{{exercicio.descricao}}</td>
+		</tr>
+
+	</table>
+	<hr />
+	<div ng-controller="ExercicioUpdateController">
+		<a href="#/exercicios" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-default">
+			<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar Exercicio
+		</button>
+		<button ng-click="toggleModalPhoto()" class="btn btn-info">
+			<i class="fa fa-file-image-o" aria-hidden="true"></i> Inserir Foto
+		</button>
+		<modal title="Alterar Exercicio" visible="showModal">
+		<form role="form" name="exercicioForm">
+
+			<div class="form-group">
+				<label for="nome">Nome</label> <input type="text" name="nomeForm"
+					class="form-control" ng-model="exercicio.nome" id="nome"
+					placeholder="Coloque o nome do exercicio" ng-required="true" />
+
+
+				<div ng-show="exercicioForm.nomeForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Nome do Exercicio</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="exercicioForm.nomeForm.$valid">
+				<label for="exercicio.tipo">Tipo de Exercicio</label> <select
+					name="tipoForm" ng-model="exercicio.tipo" ng-required="true">
+					<option value="Cardiovascular">Cardiovascular</option>
+					<option value="Treino Musculação">Treino de Musculação</option>
+				</select>
+
+				<div ng-show="exercicioForm.tipoForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Tipo de Exercicio</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="exercicioForm.tipoForm.$valid">
+				<label for="descricao">Descricao</label> <input type="text"
+					name="descricaoForm" class="form-control"
+					ng-model="exercicio.descricao" id="descricao"
+					placeholder="Coloque o nome do exercicio" ng-required="true" />
+
+				<div ng-show="exercicioForm.descricaoForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique uma Breve Descrição do
+						Exercicio</p>
+				</div>
+			</div>
+
+
+
+			<button ng-click="updateExercicio(exercicio)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Modificar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+
+		<modal title="Foto do Exercicio" visible="showModalPhoto">
+		<form id="form2" enctype="multipart/form-data" action="addphoto"
+			method="post">
+			Selecione a foto do exercicio <br /> <input type="hidden"
+				id="exercicio" name="exercicio" value="exercicio" /> <br /> <input
+				type="hidden" id="id" name="id" value="{{exercicio.id}}"> <br />
+			<input class="btn btn-default" type="file" name="photo"
+				ng-model="exercicio.photo" /> <br />
+			<button class="btn btn-default" type="submit">
+				<i class="fa fa-file-image-o" aria-hidden="true"></i> Adicionar Foto
+			</button>
+		</form>
+		</modal>
+	</div>
+</body>

@@ -1,0 +1,40 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Detalhes</h1>
+	</header>
+	<table id="example" class="table table-striped">
+		<tr>
+			<th>Nome do Cliente</th>
+			<td>{{pedidos.nome}}</td>
+		</tr>
+		<tr>
+			<th>Email Cliente</th>
+			<td>{{pedidos.email}}</td>
+		</tr>
+		<tr>
+			<th>Contacto</th>
+			<td>{{pedidos.contacto}}</td>
+		</tr>
+		<tr>
+			<th>Data do Pedido</th>
+			<td>{{pedidos.data | date: 'dd-MM-yyyy - hh:mm:ss'}}</td>
+		</tr>
+		<tr>
+			<th>Titulo</th>
+			<td>{{pedidos.titulo}}</td>
+		</tr>
+		<tr>
+			<th>Pedido</th>
+			<td>{{pedidos.assunto}}</td>
+		</tr>
+
+	</table>
+	<hr />
+</body>

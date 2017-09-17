@@ -1,0 +1,61 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isUser == 'USER' || profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1>Detalhes do Plano Alimentar</h1>
+		</header>
+		<table id="example" class="table table-striped">
+
+			<tr>
+				<td>Utilizador</td>
+				<td>{{quantidadealimentar.refeicao.perfilalimentar.user.email}}</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Tipo de Perfil</td>
+				<td>{{quantidadealimentar.refeicao.perfilalimentar.nome}}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Refeições</td>
+				<td>{{quantidadealimentar.refeicao.nome}}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Alimentos</td>
+				<td>{{quantidadealimentar.alimento.nome}}</td>
+				<td><img ng-if="quantidadealimentar.alimento.foto"
+					class="planoAlimento"
+					ng-src="data:image/jpeg;base64,{{quantidadealimentar.alimento.foto}}"
+					alt="Alimento foto" /></td>
+			</tr>
+			<tr>
+				<td>Quantidade</td>
+				<td>{{quantidadealimentar.quantidade}} gramas</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>{{quantidadealimentar.refeicao.perfilalimentar.data| date:
+					'dd-MM-yyyy'}}
+					{{(quantidadealimentar.refeicao.perfilalimentar.dia)}}</td>
+				<td></td>
+			</tr>
+
+		</table>
+		<hr />
+		<div>
+			<a href="#/planosalimentares" class="btn btn-primary"> <i
+				class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+			</a>
+
+
+		</div>
+	</div>
+</body>

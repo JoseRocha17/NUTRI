@@ -1,0 +1,84 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+
+<body>
+	<div ng-if="profile.isUser == 'USER' || profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1>Exercicio</h1>
+		</header>
+		<img ng-if="exercicio.foto" class="imgAlimento"
+			ng-src="data:image/jpeg;base64,{{exercicio.foto}}"
+			alt="Exercicio foto" />
+
+		<table id="example" class="table table-striped">
+			<tr>
+				<th>Utilizador</th>
+				<td>{{metaexercicio.perfil.user.email}} -
+					{{metaexercicio.perfil.user.name}}
+					{{metaexercicio.perfil.user.lastName}}</td>
+			</tr>
+			<tr>
+				<th>Tipo de Perfil</th>
+				<td>{{metaexercicio.perfil.nome}}</td>
+			<tr>
+				<th>Data</th>
+				<td>{{metaexercicio.perfil.data| date: 'dd-MM-yyyy'}}
+					({{metaexercicio.perfil.dia}})</td>
+			</tr>
+			<tr>
+				<th>Exercicios</th>
+				<td>{{metaexercicio.exercicio.nome}}</td>
+			</tr>
+			<tr>
+				<th>Tipo de Exercicio</th>
+				<td>{{metaexercicio.exercicio.tipo}}</td>
+			</tr>
+			<tr>
+				<th>Descrição do Exercicio</th>
+				<td>{{metaexercicio.exercicio.descricao}}</td>
+			</tr>
+			<tr>
+				<th>Calorias a gastar no exercicio</th>
+				<td>{{metaexercicio.calorias}}</td>
+			</tr>
+			<tr>
+				<th>Exercicios</th>
+				<td><button
+						ng-click="verQuantidadesExercicioPerfil(metaexercicio.id)"
+						class="btn btn-info">
+						<i class="fa fa-eye" aria-hidden="true"></i> Mostrar Atributos
+					</button></td>
+			</tr>
+		</table>
+
+		<table id="example" class="table table-striped table-bordered"
+			visible="showTableAtributosExercicio">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Atributo</th>
+					<th>Valor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="exercicioatributo in exercicioAtributoUserList">
+					<td>{{exercicioatributo.metaexercicio.exercicio.nome}}</td>
+					<td>{{exercicioatributo.atributo.nome}}</td>
+					<td>{{exercicioatributo.valor}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<button ng-click="voltarAtrasAdminExercicio(metaexercicio.perfil.id)"
+				class="btn btn-primary">
+				<i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar atrás
+			</button>
+
+		</div>
+	</div>
+</body>

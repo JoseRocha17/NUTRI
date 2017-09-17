@@ -1,0 +1,13 @@
+body {
+	font-size: 140%;
+	padding-top: 100px;
+}
+
+div.DTTT {
+	margin-bottom: 0.5em;
+	float: right;
+}
+
+div.dataTables_wrapper {
+	clear: both;
+}

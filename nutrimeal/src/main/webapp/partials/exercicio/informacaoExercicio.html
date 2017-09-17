@@ -1,0 +1,39 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Detalhes do Exercicio</h1>
+	</header>
+	<img ng-if="exercicio.foto" class="imgAlimento"
+		ng-src="data:image/jpeg;base64,{{exercicio.foto}}"
+		alt="Exercicio foto" />
+	<table class="table exercicioTable">
+
+
+		<tr>
+			<th>Nome</th>
+			<td>{{exercicio.nome}}</td>
+
+		</tr>
+		<tr>
+			<th>Tipo</th>
+			<td>{{exercicio.tipo}}</td>
+		</tr>
+		<tr>
+			<th>Descrição</th>
+			<td>{{exercicio.descricao}}</td>
+		</tr>
+
+	</table>
+	<hr />
+	<div>
+		<a href="#/userexercicios" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+	</div>
+</body>

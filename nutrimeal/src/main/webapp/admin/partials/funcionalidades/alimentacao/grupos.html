@@ -1,0 +1,120 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Grupos</h1>
+	</header>
+	<div class="table-responsive">
+		<input class="form-control" type="text" ng-model="searchCriteria"
+			placeholder="Que grupo deseja procurar?" />
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="0" width="100%" ng-model="gruposList">
+			<thead>
+				<tr>
+					<th><a href="" ng-click="orderBy('nome')">Nome</a></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr
+					ng-repeat="grupo in gruposList | filter: searchCriteria | orderBy : rowOrdered :orderDirection">
+					<td>{{grupo.nome}}</td>
+
+					<td><a class="btn btn-info" ng-click="editGrupo(grupo.id)">
+							<i class="fa fa-search-plus" aria-hidden="true"></i> Ver Grupo
+					</a> <a class="btn btn-warning" ng-click="deleteGrupo(grupo.id)"> <i
+							class="fa fa-trash" aria-hidden="true"></i> Apagar
+					</a> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<hr />
+	<div>
+		<a href="#/main" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+		</button>
+		
+<!-- 		Modal Create Grupo Alimentar -->
+		<modal title="Adicionar grupo" visible="showModal">
+		<form role="form" name="grupoForm">
+
+			<div class="form-group">
+				<label for="nome">Nome</label> <input type="text"
+					class="form-control" ng-model="grupo.nome" id="nome"
+					name="nomeForm" placeholder="Coloque o nome do grupo"
+					ng-required="true" />
+
+				<div ng-show="grupoForm.nomeForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Nome do Grupo Alimentar</p>
+				</div>
+			</div>
+
+			<button ng-disabled="grupoForm.$invalid"
+				ng-click="createNewGrupo(grupo)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+		
+		
+<!-- 		Modal Update Grupo Alimentar -->
+		<modal title="Adicionar grupo" visible="showModalUpdate">
+		<form role="form" name="grupoForm">
+
+			<div class="form-group">
+				<label for="nome">Nome</label> <input type="text"
+					class="form-control" ng-model="grupo.nome" id="nome"
+					name="nomeForm" placeholder="Coloque o nome do grupo"
+					ng-required="true" />
+
+				<div ng-show="grupoForm.nomeForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Nome do Grupo Alimentar</p>
+				</div>
+			</div>
+
+			<button ng-disabled="grupoForm.$invalid"
+				ng-click="updateGrupo(grupo)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="closeUpdate()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+		
+		<!-- 	Modal Apagar Grupo -->
+		<modal visible="showModalApagar" id="modalApagar">
+
+		<form>
+			<div>
+				<div class="form-group">
+					<label id="Apagar"><h1>Grupo Alimentar Excluido
+							com Sucesso!</h1></label>
+				</div>
+
+			</div>
+			<button type="button" class="btn btn-success"
+				ng-click="closeApagar()">
+				<i class="fa fa-times" aria-hidden="true"></i> Ok
+			</button>
+		</form>
+		</modal>
+	</div>
+</body>

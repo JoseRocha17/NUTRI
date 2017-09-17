@@ -1,0 +1,139 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+
+	<header>
+		<h1>Novidades</h1>
+	</header>
+	<div class="table-responsive">
+		<table id="NovidadeTable" class="table table-striped table-bordered"
+			cellspacing="50" width="100%" ng-model="novidadesList">
+			<tbody>
+				<tr>
+					<th>Titulo</th>
+					<th>Breve Descricao</th>
+				</tr>
+				<tr ng-repeat="novidade in novidadesList | filter: searchCriteria">
+					<td>{{novidade.titulo}}</td>
+					<td>{{novidade.brevedesc}}</td>
+					<td><a class="btn btn-info"
+						ng-click="editNovidade(novidade.id)"> <i
+							class="fa fa-search-plus" aria-hidden="true"></i> Consultar
+					</a> <a class="btn btn-warning" ng-click="deleteNovidade(novidade.id)">
+							<i class="fa fa-trash" aria-hidden="true"></i> Apagar
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<hr />
+	<div>
+		<a href="#/main" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+		</button>
+		<modal title="Adicionar Novidade" visible="showModal">
+		<form role="form" name="novidadeForm">
+
+			<div class="form-group">
+				<label for="titulo">Titulo</label> <input type="text"
+					name="tituloForm" class="form-control" ng-model="novidade.titulo"
+					id="titulo" placeholder="Coloque o nome do atributo"
+					ng-required="true" />
+
+				<div ng-show="novidadeForm.tituloForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Titulo da Novidade</p>
+				</div>
+			</div>
+
+			<div ng-show="novidadeForm.tituloForm.$valid" class="form-group">
+				<label for="brevedesc">Breve Descricao</label> <input type="text"
+					name="breveDescForm" class="form-control"
+					ng-model="novidade.brevedesc" id="brevedesc"
+					placeholder="Coloque o nome do atributo" ng-required="true" />
+
+				<div ng-show="novidadeForm.breveDescForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique uma Breve Descrição</p>
+				</div>
+			</div>
+
+			<!-- 			<div ng-show="novidadeForm.breveDescForm.$valid" class="form-group"> -->
+			<!-- 				<label for="descricao">Descricao</label> <input type="text" -->
+			<!-- 					name="descForm" class="form-control" ng-model="novidade.descricao" -->
+			<!-- 					id="descricao" placeholder="Coloque o nome do atributo" -->
+			<!-- 					ng-required="true" /> -->
+
+			<!-- 				<div ng-show="novidadeForm.descForm.$invalid " -->
+			<!-- 					class="alert alert-danger"> -->
+			<!-- 					<p class="alertas">Por Favor Indique uma Descrição</p> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
+
+			<div>
+				<label for="descricao">Descricao</label>
+				<div class="form-group" ng-show="novidadeForm.breveDescForm.$valid">
+
+					<textarea ng-required="true" name="descForm" class="input-xlarge"
+						ng-model="novidade.descricao" id="descricao"
+						placeholder="Coloque uma descrição da novidade"
+						style="resize: none" rows="10" cols="50" class="comboBox">
+					</textarea>
+					<div ng-show="novidadeForm.descForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique uma Descrição</p>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div ng-show="novidadeForm.descForm.$valid" class="form-group">
+				<label for="data">Data da Novidade</label> <input type="date"
+					name="dataForm" class="form-control" ng-model="novidade.data"
+					id="data" placeholder="Coloque a data para este perfil" />
+
+				<div ng-show="novidadeForm.dataForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique uma Data da Novidade</p>
+				</div>
+			</div>
+
+			<button ng-disabled="novidadeForm.$invalid"
+				ng-click="createNewNovidade(novidade)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+
+		<!-- 	Modal Apagar Novidade -->
+		<modal visible="showModalApagar" id="modalApagar">
+
+		<form>
+			<div>
+				<div class="form-group">
+					<label id="Apagar"><h1>Novidade Excluida com Sucesso!</h1></label>
+				</div>
+
+			</div>
+			<button type="button" class="btn btn-success"
+				ng-click="closeApagar()">
+				<i class="fa fa-times" aria-hidden="true"></i> Ok
+			</button>
+		</form>
+		</modal>
+	</div>
+</body>

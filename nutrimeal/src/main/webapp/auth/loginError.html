@@ -1,0 +1,42 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.css">
+<link rel="stylesheet" href="css/loginError.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<header> </header>
+	<div>
+		<br></br> <br></br> <br></br>
+		<h1>
+			<b>Ocurreu um erro no Login</b>
+		</h1>
+		<h1>
+			<b>Inseriu dados incorrectos! Tente Novamente!</b>
+		</h1>
+		<br></br> <br></br> <br></br>
+
+		<!-- 			<li class="xpto" id="regBtn" -->
+		<!-- 							ng-if="profile.isUser != 'USER' && profile.isAdmin != 'ADMIN'"> -->
+		<!-- 							<a href="#/register" class="xpto"><i -->
+		<!-- 								class="glyphicon glyphicon-check"></i> Registar</a> -->
+		<!-- 						</li> -->
+
+		<a ng-if="profile.isUser != 'USER' && profile.isAdmin != 'ADMIN'"
+			href="#/register" class="btn btn-primary"> <i
+			class="glyphicon glyphicon-check" aria-hidden="true"></i> Registar
+			
+		</a> 
+		<a ng-if="profile.isUser != 'USER' && profile.isAdmin != 'ADMIN'"
+			href="#/login" class="btn btn-primary"> <i
+			class="glyphicon glyphicon-user" aria-hidden="true"></i> Login
+		</a>
+
+<!-- 		<button class="xpto" id="loginBtn" -->
+<!-- 			ng-if="profile.isUser != 'USER' && profile.isAdmin != 'ADMIN'"> -->
+<!-- 			<a href="#/login" class="xpto"><i -->
+<!-- 				class="glyphicon glyphicon-user"></i> Login</a> -->
+<!-- 		</button> -->
+	</div>
+</body>

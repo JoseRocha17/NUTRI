@@ -1,0 +1,117 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Fazer Pedido</h1>
+	</header>
+
+	<div class="container">
+
+		<form class="form-horizontal" role="form" name="pedidosForm">
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="nome">Email</label>
+				<div class="col-sm-8">
+					<input type="email" name="emailForm" class="form-control"
+						ng-model="pedidos.email" id="email"
+						placeholder="Coloque o seu email" ng-required="true" />
+					<div ng-show="pedidosForm.emailForm.$valid"
+						class="alert alert-success">
+						<p class="alertas">Email Válido!</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="nome">Nome
+					Proprio</label>
+
+				<div class="col-sm-8">
+					<input type="text" name="nomeForm" class="form-control"
+						ng-model="pedidos.nome" id="nome" placeholder="Coloque o seu nome"
+						ng-required="true" />
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="contacto">Contacto</label>
+
+				<div class="col-sm-8">
+					<input type="text" name="contactoForm" class="form-control"
+						ng-model="pedidos.contacto" id="contacto"
+						placeholder="Coloque o seu contacto" ng-required="true" />
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="titulo">Titulo</label>
+
+				<div class="col-sm-8">
+					<input type="text" name="tituloForm" class="form-control"
+						ng-model="pedidos.titulo" id="titulo"
+						placeholder="Coloque o titulo do pedido" ng-required="true" />
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="descricao">Assunto</label>
+
+				<div class="col-sm-8">
+					<textarea ng-required="true" name="assuntoForm"
+						class="form-control" class="input-xlarge"
+						ng-model="pedidos.assunto" id="assunto"
+						placeholder="Coloque o assunto do pedido" style="resize: none"
+						rows="10" cols="50" class="comboBox">
+					</textarea>
+				</div>
+
+			</div>
+
+
+			<div class="col-sm-9">
+				<label class="col-sm-3 control-label"></label>
+				<button ng-disabled="pedidosForm.$invalid"
+					ng-click="createNewPedidos(pedidos)" class="btn btn-success" onclick="alert('Pedido enviado com sucesso')">
+					<i class="fa fa-plus" aria-hidden="true" ></i> Adicionar
+				</button>
+			</div>
+		</form>
+
+
+		<!-- 		Modal Pedido -->
+		<modal visible="showModalDone" id="modalApagar">
+
+		<form>
+			<div>
+				<div class="form-group">
+					<label id="Apagar"><h1>Pedido enviado ao admnistrador!</h1></label>
+				</div>
+
+			</div>
+			<button type="button" class="btn btn-success"
+				ng-click="closeDone()">
+				<i class="fa fa-times" aria-hidden="true"></i> Ok
+			</button>
+		</form>
+		</modal>
+	</div>
+	
+	</div>
+
+	<hr />
+	<div>
+		<a href="#/main" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+
+
+
+	</div>
+</body>

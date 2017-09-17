@@ -1,0 +1,97 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header>
+<h1>Preencher Perfil Pessoal</h1>
+</header>
+<div class="editProfile">
+<form class="form-horizontal">
+
+	<div class="form-group">
+		<label for="data_nasc" class="col-sm-2 control-label">Data de Nascimento</label>
+		<div class="col-sm-10">
+			<input type="date" ng-model="user.data_nasc" class="form-control"
+				id="data_nasc" placeholder="Insira data de nascimento" required/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="contacto" class="col-sm-2 control-label">Contacto</label>
+		<div class="col-sm-10">
+			<input type="text" ng-model="user.contacto" class="form-control"
+				id="contacto" placeholder="Insira seu contacto." required/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="sexo" class="col-sm-2 control-label">Sexo</label>
+		<div class="col-sm-10">
+		<select ng-model="user.sexo" required>
+  			<option>Masculino</option>
+  			<option>Feminino</option>
+		</select>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="localidade" class="col-sm-2 control-label">Localidade</label>
+		<div class="col-sm-10">
+			<input type="text" ng-model="user.localidade" class="form-control"
+				id="localidade" placeholder="Insira sua localidade."/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="nacionalidade" class="col-sm-2 control-label">Nacionalidade</label>
+		<div class="col-sm-10">
+			<input type="text" ng-model="user.nacionalidade" class="form-control"
+				id="nacionalidade" placeholder="Insira sua nacionalidade."/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="morada" class="col-sm-2 control-label">Morada</label>
+		<div class="col-sm-10">
+			<input type="text" ng-model="user.morada" class="form-control"
+				id="morada" placeholder="Insira sua Morada."/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="codigo_postal" class="col-sm-2 control-label">Código Postal</label>
+		<div class="col-sm-10">
+			<input type="text" ng-model="user.codigo_postal" class="form-control"
+				id="codigo_postal" placeholder="Insira seu Código Postal."/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="bi" class="col-sm-2 control-label">Número de BI</label>
+		<div class="col-sm-10">
+			<input type="number" ng-model="user.bi" class="form-control"
+				id="bi" placeholder="Insira seu Número de BI."/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="contribuinte" class="col-sm-2 control-label">Número de Contribuinte</label>
+		<div class="col-sm-10">
+			<input type="number" ng-model="user.contribuinte" class="form-control"
+				id="contribuinte" placeholder="Insira seu Número de Contribuinte"/>
+		</div>
+	</div>
+	
+	<div class="control-group" ng-controller="UserViewController">
+		<div class="controls" ng-app="userApp" ng-controller="PessoaUpdateController">
+			<a ng-click="updatePessoa(user)" class="btn btn-small btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Confirmar</a>
+ 			<a href="#/profile/" class="btn btn-small btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</a>
+		</div>
+	</div>
+	
+</form>
+
+</div>
+</body>

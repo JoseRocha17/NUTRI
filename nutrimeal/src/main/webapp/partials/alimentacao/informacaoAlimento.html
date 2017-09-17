@@ -1,0 +1,74 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isUser == 'USER' || profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1 align="center">{{alimento.nome}}</h1>
+			<br> 
+		</header>
+		<img ng-if="alimento.foto" class="imgAlimento"
+			ng-src="data:image/jpeg;base64,{{alimento.foto}}" alt="Alimento foto" />
+		<br>
+		<br>
+		<table class="table alimentoTable">
+
+			<tr>
+				<th>Calorias</th>
+				<td>{{alimento.calorias}}</td>
+			</tr>
+			<tr>
+				<th>Grupo</th>
+				<td>{{alimento.grupo.nome}}</td>
+			</tr>
+			<tr>
+				<th>Gordura</th>
+				<td>{{alimento.gordura}} g</td>
+			</tr>
+			<tr>
+				<th>Colestrol</th>
+				<td>{{alimento.colestrol}} mg</td>
+			</tr>
+			<tr>
+				<th>Sodio</th>
+				<td>{{alimento.sodio}} mg</td>
+			</tr>
+			<tr>
+				<th>Potassio</th>
+				<td>{{alimento.potassio}} mg</td>
+			</tr>
+			<tr>
+				<th>Carboidratos</th>
+				<td>{{alimento.carboidrato}} g</td>
+			</tr>
+			<tr>
+				<th>Fibra</th>
+				<td>{{alimento.fibra}} g</td>
+			</tr>
+			<tr>
+				<th>Acucar</th>
+				<td>{{alimento.acucar}} g</td>
+			</tr>
+			<tr>
+				<th>Proteina</th>
+				<td>{{alimento.proteina}} g</td>
+			</tr>
+
+		</table>
+		<hr />
+
+		<div>
+
+			<a href="#/useralimentos" class="btn btn-primary"> <i
+				class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+			</a>
+
+			
+		</div>
+		
+	</div>
+</body>

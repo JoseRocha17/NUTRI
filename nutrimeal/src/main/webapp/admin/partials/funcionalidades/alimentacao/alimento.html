@@ -1,0 +1,252 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>{{alimento.nome}}</h1>
+	</header>
+	<div ng-if="profile.isAdmin == 'ADMIN'">
+
+		<img ng-if="alimento.foto" class="imgAlimento"
+			ng-src="data:image/jpeg;base64,{{alimento.foto}}" alt="Alimento foto" />
+		<form ng-if="alimento.foto" id="alimentoPhoto"
+			enctype="multipart/form-data" action="addphoto" method="post">
+			<input type="hidden" id="removerAlimentoFoto"
+				name="removerAlimentoFoto" value="removerAlimentoFoto" /> <input
+				type="hidden" id="nome" name="nome" value="{{alimento.id}}">
+			<button type="submit" class="btn">
+				<i class="fa fa-times" aria-hidden="true"></i>Apagar Foto
+			</button>
+		</form>
+		<br>
+		<br>
+
+		<table class="table alimentoTable">
+
+			<tr>
+				<th>Nome</th>
+				<td>{{alimento.nome}}</td>
+			</tr>
+			<tr>
+				<th>Grupo</th>
+				<td>{{alimento.grupo.nome}}</td>
+			</tr>
+			<tr>
+				<th>Calorias</th>
+				<td>{{alimento.calorias}}</td>
+			</tr>
+			<tr>
+				<th>Gordura</th>
+				<td>{{alimento.gordura}} g</td>
+			</tr>
+			<tr>
+				<th>Colestrol</th>
+				<td>{{alimento.colestrol}} mg</td>
+			</tr>
+			<tr>
+				<th>Sodio</th>
+				<td>{{alimento.sodio}} mg</td>
+			</tr>
+			<tr>
+				<th>Potassio</th>
+				<td>{{alimento.potassio}} mg</td>
+			</tr>
+			<tr>
+				<th>Carboidratos</th>
+				<td>{{alimento.carboidrato}} g</td>
+			</tr>
+			<tr>
+				<th>Fibra</th>
+				<td>{{alimento.fibra}} 0g</td>
+			</tr>
+			<tr>
+				<th>Acucar</th>
+				<td>{{alimento.acucar}} g</td>
+			</tr>
+			<tr>
+				<th>Proteina</th>
+				<td>{{alimento.proteina}} g</td>
+			</tr>
+
+		</table>
+		<hr />
+
+		<div>
+
+			<a href="#/alimentosAdmin" class="btn btn-primary"> <i
+				class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+			</a>
+
+			<button ng-click="toggleModalPhoto()"
+				ng-message="Por favor insira a foto correspondente"
+				class="btn btn-info">
+				<i class="fa fa-file-image-o" aria-hidden="true"></i> Inserir Foto
+			</button>
+
+			<button ng-click="toggleModal()"
+				class="btn btn-default">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar Alimento
+			</button>
+		</div>
+	</div>
+	<div>
+		<modal title="Foto de Alimento" visible="showModalPhoto">
+		<form id="form2" enctype="multipart/form-data" action="addphoto"
+			method="post">
+			Selecione a foto do alimento <br /> <input type="hidden"
+				id="alimento" name="alimento" value="alimento" /> <br /> <input
+				type="hidden" id="id" name="id" value="{{alimento.id}}"> <br />
+			<input class="btn btn-default" type="file" name="photo"
+				ng-model="alimento.photo" /> <br />
+			<button class="btn btn-default" type="submit">
+				<i class="fa fa-file-image-o" aria-hidden="true"></i> Adicionar Foto
+			</button>
+		</form>
+		</modal>
+
+		<modal title="Modificar Alimento" visible="showModal">
+
+			<form role="form" name="alimentoForm">
+				<div class="form-group">
+
+					<label for="nome"><h1>Nome</h1> </label> <input type="text"
+						class="form-control" ng-model="alimento.nome" id="nome"
+						name="nomeForm" placeholder="Coloque o nome do alimento "
+						ng-required="true" />
+
+					<div ng-show="alimentoForm.nomeForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique o Nome do Alimento</p>
+					</div>
+
+				</div>
+
+				<div class="form-group" ng-show="alimentoForm.grupoForm.$valid">
+					<label for="nome">Calorias /100g</label> <input type="text"
+						class="form-control" ng-model="alimento.calorias" id="calorias"
+						name="caloriasForm" placeholder="Coloque o valor calorico"
+						ng-required="true" />
+
+					<div ng-show="alimentoForm.caloriasForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique as Calorias do Alimento
+							/100g</p>
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="alimentoForm.caloriasForm.$valid">
+					<label for="nome">Gordura</label> <input type="text"
+						name="gorduraForm" class="form-control"
+						ng-model="alimento.gordura" id="gordura"
+						placeholder="Coloque a gordura do alimento" ng-required="true" />
+
+					<div ng-show="alimentoForm.gorduraForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique a Gordura do Alimento</p>
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="alimentoForm.gorduraForm.$valid">
+
+					<label for="nome">Colestrol</label> <input type="text"
+						name="colestrolForm" class="form-control"
+						ng-model="alimento.colestrol" id="colestrol"
+						placeholder="Coloque o valor do colestrol" ng-required="true" />
+
+					<div ng-show="alimentoForm.colestrolForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique o Colestrol do Alimento</p>
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="alimentoForm.colestrolForm.$valid">
+
+					<label for="nome">Sódio</label> <input type="text" name="sodioForm"
+						class="form-control" ng-model="alimento.sodio" id="sodio"
+						placeholder="Coloque o valor de sódio" ng-required="true" />
+
+					<div ng-show="alimentoForm.sodioForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique o Sódio do Alimento</p>
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="alimentoForm.sodioForm.$valid">
+
+					<label for="nome">Potassio</label> <input type="text"
+						name="potassioForm" class="form-control"
+						ng-model="alimento.potassio" id="potassio"
+						placeholder="Coloque o valor de potassio" ng-required="true" />
+
+					<div ng-show="alimentoForm.potassioForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique o Potassio do Alimento</p>
+					</div>
+
+				</div>
+
+				<div class="form-group" ng-show="alimentoForm.potassioForm.$valid">
+					<label for="nome">Carboidrato</label> <input type="text"
+						name="carboidratoForm" class="form-control"
+						ng-model="alimento.carboidrato" id="carboidrato"
+						placeholder="Coloque o valor de potassio" ng-required="true" />
+
+					<div ng-show="alimentoForm.carboidratoForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique o Carboidrato do Alimento</p>
+					</div>
+
+				</div>
+				<div class="form-group"
+					ng-show="alimentoForm.carboidratoForm.$valid">
+					<label for="nome">Fibra</label> <input type="text" name="fibraForm"
+						class="form-control" ng-model="alimento.fibra" id="fibra"
+						placeholder="Coloque o valor de fibra" ng-required="true" />
+
+					<div ng-show="alimentoForm.fibraForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique a Fibra do Alimento</p>
+					</div>
+
+				</div>
+
+				<div class="form-group" ng-show="alimentoForm.fibraForm.$valid">
+					<label for="nome">Açucar</label> <input type="text"
+						name="acucarForm" class="form-control" ng-model="alimento.acucar"
+						id="acucar" placeholder="Coloque o valor de açucar"
+						ng-required="true" />
+
+					<div ng-show="alimentoForm.acucarForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique o Açucar do Alimento</p>
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="alimentoForm.acucarForm.$valid">
+					<label for="nome">Proteina</label> <input type="text"
+						name="proteinaForm" class="form-control"
+						ng-model="alimento.proteina" id="proteina"
+						placeholder="Coloque o valor de proteína" ng-required="true" />
+
+					<div ng-show="alimentoForm.proteinaForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique a Proteina do Alimento</p>
+					</div>
+				</div>
+
+				<button ng-disabled="alimentoForm.$invalid"
+					ng-click="updateAlimento(alimento)" class="btn btn-success">
+					<i class="fa fa-plus" aria-hidden="true"></i> Atualizar
+				</button>
+
+				<button type="button" class="btn btn-danger" ng-click="close()">
+					<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+				</button>
+			</form>
+		</modal>
+	</div>
+</body>

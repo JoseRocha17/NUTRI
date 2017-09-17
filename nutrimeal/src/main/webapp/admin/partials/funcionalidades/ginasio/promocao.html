@@ -1,0 +1,161 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div></div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<img ng-if="promocao.foto" class="imgPromocao"
+					ng-src="data:image/jpeg;base64,{{promocao.foto}}"
+					alt="Exercicio foto" />
+				<form ng-if="promocao.foto" id="promocaoPhoto"
+					enctype="multipart/form-data" action="addphoto" method="post">
+					<input type="hidden" id="removerPromocaoFoto"
+						name="removerPromocaoFoto" value="removerPromocaoFoto" /> <input
+						type="hidden" id="nome" name="nome" value="{{promocao.id}}">
+					<button type="submit" class="btn">
+						<i class="fa fa-times" aria-hidden="true"></i>Apagar Foto
+					</button>
+				</form>
+			</div>
+			<div class="col-sm-6" id="novidadeColumnTitulo">{{promocao.titulo}}</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6" id="novidadeColumnData">Data Inicio:
+				{{promocao.dataInicio| date: 'dd-MM-yyyy'}}</div>
+			<div class="col-sm-6" id="novidadeColumnData">Data Fim:
+				{{promocao.dataFim| date: 'dd-MM-yyyy'}}</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6" id="novidadeColumnBreveDescricao"
+				align="center">{{promocao.breveDesc}}</div>
+			<div class="col-sm-6" id="novidadeColumnData" align="center">{{promocao.preco}}
+				€</div>
+		</div>
+		<div class="row">
+
+			<div class="col-sm-12" id="novidadeColumnDescricao">{{promocao.descricao}}</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-12" id="novidadeColumnDescricao">Detalhes:
+				{{promocao.descricao}}</div>
+
+		</div>
+		<hr>
+		<button ng-click="toggleModalPhoto()" class="btn btn-info">
+			<i class="fa fa-file-image-o" aria-hidden="true"></i> Inserir Foto
+		</button>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Alterar
+		</button>
+	</div>
+	<div>
+		<modal title="Foto da Promocao" visible="showModalPhoto">
+		<form id="form2" enctype="multipart/form-data" action="addphoto"
+			method="post">
+			Selecione a foto do exercicio <br /> <input type="hidden"
+				id="promocao" name="promocao" value="promocao" /> <br /> <input
+				type="hidden" id="id" name="id" value="{{promocao.id}}"> <br />
+			<input class="btn btn-default" type="file" name="photo"
+				ng-model="promocao.photo" /> <br />
+			<button class="btn btn-default" type="submit">
+				<i class="fa fa-file-image-o" aria-hidden="true"></i> Adicionar Foto
+			</button>
+		</form>
+		</modal>
+	</div>
+
+	<modal title="Modificar Promoção" visible="showModal">
+	<form role="form" name="promocaoForm">
+
+		<div class="form-group">
+			<label for="titulo">Titulo</label> <input type="text"
+				name="tituloForm" class="form-control" ng-model="promocao.titulo"
+				id="titulo" placeholder="Coloque o nome do atributo"
+				ng-required="true" />
+
+			<div ng-show="promocaoForm.tituloForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Titulo da Promoção</p>
+			</div>
+		</div>
+
+		<div ng-show="promocaoForm.tituloForm.$valid" class="form-group">
+			<label for="brevedesc">Breve Descricao</label> <input type="text"
+				class="form-control" ng-model="promocao.breveDesc" id="breveDesc"
+				name="breveDescForm" placeholder="Coloque o nome do atributo"
+				ng-required="true" />
+
+			<div ng-show="promocaoForm.breveDescForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique uma Breve Descrição</p>
+			</div>
+		</div>
+
+		<div ng-show="promocaoForm.breveDescForm.$valid" class="form-group">
+			<label for="descricao">Descricao</label> <input type="text"
+				class="form-control" ng-model="promocao.descricao" id="descricao"
+				name="descForm" placeholder="Coloque o nome do atributo"
+				ng-required="true" />
+
+			<div ng-show="promocaoForm.descForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique uma Descrição</p>
+			</div>
+		</div>
+
+		<div ng-show="promocaoForm.descForm.$valid" class="form-group">
+			<label for="descricao">Preco</label> <input type="number"
+				class="form-control" ng-model="promocao.preco" id="preco"
+				name="precoForm" placeholder="Coloque o nome do atributo"
+				ng-required="true" />
+
+			<div ng-show="promocaoForm.precoForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique um Preço da Nova Promoção</p>
+			</div>
+		</div>
+
+		<div ng-show="promocaoForm.precoForm.$valid" class="form-group">
+			<label for="data">Data Inicio</label> <input type="date" format-date
+				class="form-control" ng-model="promocao.dataInicio" id="dataInicio"
+				name="dataInicioForm" placeholder="Coloque a data para este perfil" />
+
+			<div ng-show="promocaoForm.dataInicioForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique a Data de Inicio</p>
+			</div>
+		</div>
+
+		<div ng-show="promocaoForm.precoForm.$valid" class="form-group">
+			<label for="data">Data Fim</label> <input type="date" format-date
+				class="form-control" ng-model="promocao.dataFim" id="dataFim"
+				name="dataFim" placeholder="Coloque a data para este perfil" />
+
+			<div ng-show="promocaoForm.dataFimForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique a Data do Fim</p>
+			</div>
+		</div>
+
+		<button ng-disabled="promocaoForm.$invalid"
+			ng-click="updatePromocao(promocao)" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Modificar
+		</button>
+
+		<button type="button" class="btn btn-danger" ng-click="close()">
+			<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+		</button>
+	</form>
+	</modal>
+
+</body>

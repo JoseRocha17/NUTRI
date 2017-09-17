@@ -1,0 +1,70 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1 align="center">Perfil Fisico</h1>
+
+		</header>
+		<table class="table perfilFisicoTable">
+
+			<tr>
+				<th>Utilizador</th>
+				<td>{{perfilfisico.user.email}} - {{perfilfisico.user.name}}
+					{{perfilfisico.user.lastName}}</td>
+			</tr>
+
+			<tr>
+				<th>Tipo de Perfil</th>
+				<td>{{perfilfisico.nome}}</td>
+			</tr>
+			<tr>
+				<th>Data</th>
+				<td>{{perfilfisico.data| date: 'dd-MM-yyyy'}}
+					({{perfilfisico.dia}})</td>
+			</tr>
+			<tr>
+				<th>Exercicios:</th>
+				<td><button ng-click="verExerciciosUserPerfil(perfilfisico.id)"
+						class="btn btn-info">
+						<i class="fa fa-eye" aria-hidden="true"></i> Mostrar Exercicios
+					</button></td>
+			</tr>
+
+		</table>
+
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="50" width="100%" ng-model="perfilExercicioUserList"
+			visible="showTableExercicios">
+			<thead>
+				<tr>
+					<th>Nome do Exercicio</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="metaexercicio in perfilExercicioUserList">
+					<td>{{metaexercicio.exercicio.nome}}</td>
+					<td><a class="btn btn-info"
+						ng-click="verMetaExercicioAdmin(metaexercicio.id)"> <i
+							class="fa fa-eye" aria-hidden="true"></i> Ver Detalhes do
+							Exercicio
+					</a>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<a href="#/perfisFisicosAdmin" class="btn btn-primary"> <i
+				class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+			</a>
+
+
+		</div>
+	</div>
+
+</body>

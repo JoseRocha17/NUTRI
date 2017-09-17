@@ -1,0 +1,192 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isAdmin == 'ADMIN'">
+		<header>
+			<h3 align="center">Perfil Alimentar</h3>
+		</header>
+		<table class="table perfilalimentarTable">
+
+			<tr>
+				<td><b>Utilizador</b></td>
+				<td>{{perfilalimentar.user.email}} -
+					{{perfilalimentar.user.name}} {{perfilalimentar.user.lastName}}</td>
+			</tr>
+			<tr>
+				<td><b>Nome Perfil</b></td>
+				<td>{{perfilalimentar.nome}}</td>
+			</tr>
+			<tr>
+				<td><b>Data</b></td>
+				<td>{{perfilalimentar.data| date: 'dd-MM-yyyy'}} -
+					{{perfilalimentar.dia}}</td>
+			</tr>
+			<tr>
+				<th>Refeições</th>
+				<td><button ng-click="verRefeicoes(perfilalimentar.id)"
+						class="btn btn-info">
+						<i class="fa fa-eye" aria-hidden="true"></i> Mostrar Refeicões
+					</button></td>
+			</tr>
+		</table>
+
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="50" width="100%" ng-model="refeicaoUserList"
+			visible="showTableRefeicoes">
+			<thead>
+				<tr>
+					<th>Nome Refeicao</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					ng-repeat="refeicao in refeicaoUserList | filter: searchCriteria | orderBy : rowOrdered :orderDirection">
+					<td>{{refeicao.nome}}</td>
+
+					<td><a class="btn btn-info"
+						ng-click="verRefeicaoCreateQuantidade(refeicao.id)"> <i
+							class="fa fa-eye" aria-hidden="true"></i> Ver Detalhes
+					</a> <a class="btn btn-warning" ng-click="deleteRefeicao(refeicao.id)">
+							<i class="fa fa-trash" aria-hidden="true"></i> Apagar
+					</a></td>
+				</tr>
+				<tr>
+					<td>
+						<button ng-click="toggleModalAddRefeicao()"
+							class="btn btn-success">
+							<i class="fa fa-plus" aria-hidden="true"></i> Adicionar Refeicao
+						</button>
+
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<hr />
+	<div>
+		<a href="#/criarPerfisAlimentaresAdmin" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Modificar Perfil
+		</button>
+	</div>
+
+	<modal title="Adicionar Refeicao" visible="showModalRefeicao">
+	<form role="form" name="refeicaoForm">
+
+		<div class="form-group">
+			<label for="name">Nome da Refeição</label> <input type="text"
+				class="form-control" ng-model="refeicao.nome" id="name"
+				name="nomeForm" placeholder="Coloque o nome da refeição"
+				ng-required="true" />
+
+			<div ng-show="refeicaoForm.nomeForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Nome da Refeição</p>
+			</div>
+		</div>
+
+
+		<div class="form-group" ng-controller="PerfilalimentarViewController">
+			<input type="hidden" ng-model="refeicao.perfil" id="perfil"
+				value="{{perfilalimentar.id}}" />
+		</div>
+
+
+		<button ng-disabled="refeicaoForm.$invalid"
+			ng-click="createNewRefeicao(refeicao, perfilalimentar.id)"
+			class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+		</button>
+
+		<button type="button" class="btn btn-danger"
+			ng-click="closeRefeicao()">
+			<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+		</button>
+	</form>
+	</modal>
+
+
+	<modal title="Modificar Pefil" visible="showModal">
+	<form role="form" name="perfilalimentarForm">
+
+		<div class="form-group">
+			<label for="name">Tipo de Perfil</label> <input type="text"
+				class="form-control" ng-model="perfilalimentar.nome" id="name"
+				name="tipoForm" placeholder="Tipo de Perfil" ng-required="true" />
+
+			<div ng-show="perfilalimentarForm.tipoForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Tipo de Perfil Alimentar</p>
+			</div>
+		</div>
+
+		<div class="form-group" ng-show="perfilalimentarForm.userForm.$valid">
+			<label for="perfilalimentar.dia">Dia da semana</label> <select
+				name="diaForm" ng-model="perfilalimentar.dia" ng-required="true">
+				<option value="Domingo">Domingo</option>
+				<option value="Segunda-Feira">Segunda-Feira</option>
+				<option value="Terça-Feira">Terça-Feira</option>
+				<option value="Quarta-Feira">Quarta-Feira</option>
+				<option value="Quinta-Feira">Quinta-Feira</option>
+				<option value="Sexta-Feira">Sexta-Feira</option>
+				<option value="Sabado">Sabado</option>
+			</select>
+
+			<div ng-show="perfilalimentarForm.diaForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Dia da Semana</p>
+			</div>
+		</div>
+
+		<div class="form-group" ng-show="perfilalimentarForm.diaForm.$valid">
+			<label for="data">Data do Pefil</label> <input type="date"
+				format-date name="dataPerfilForm" class="form-control"
+				ng-model="perfilalimentar.data" id="data" value="0"
+				placeholder="Coloque a data para este perfil" />
+
+			<div ng-show="perfilalimentarForm.dataForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique a Data do Perfil</p>
+			</div>
+		</div>
+
+
+		<button ng-click="updatePerfilalimentar(perfilalimentar)"
+			ng-disabled="perfilalimentarForm.$invalid" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Modificar
+		</button>
+
+		<button type="button" class="btn btn-danger" ng-click="close()">
+			<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+		</button>
+	</form>
+	</modal>
+
+	<!-- 	Modal Apagar Refeicao -->
+	<modal visible="showModalApagar" id="modalApagar">
+
+	<form>
+		<div>
+			<div class="form-group">
+				<label id="Apagar"><h1>Refeicao Excluida Com Sucesso!</h1></label>
+			</div>
+
+		</div>
+		<button type="button" class="btn btn-success"
+			ng-click="verRefeicoes(perfilalimentar.id)">
+			<i class="fa fa-times" aria-hidden="true"></i> Ok
+		</button>
+	</form>
+	</modal>
+
+
+</body>

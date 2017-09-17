@@ -1,0 +1,139 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Detalhes da Medição</h1>
+	</header>
+	<table class="table medidaTable">
+		<tr>
+			<th>Utilizador</th>
+			<td>{{medida.user.email}}</td>
+		</tr>
+		<tr>
+			<th>Data</th>
+			<td>{{medida.data| date: 'dd-MM-yyyy'}}</td>
+		</tr>
+		<tr>
+			<th>Peso</th>
+			<td>{{medida.peso}} Kg</td>
+		</tr>
+		<tr>
+			<th>Altura</th>
+			<td>{{medida.altura}} cm</td>
+		</tr>
+		<tr>
+			<th>Pescoço</th>
+			<td>{{medida.pescoco}} cm</td>
+		</tr>
+		<tr>
+			<th>Cintura</th>
+			<td>{{medida.cintura}} cm</td>
+		</tr>
+		<tr>
+			<th>Quadris</th>
+			<td>{{medida.quadris}} cm</td>
+		</tr>
+
+	</table>
+	<hr />
+	<div ng-controller="MedidasUpdateController">
+		<a href="#/medidas" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-default">
+			<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Alterar
+		</button>
+
+		<modal title="Modificar Medição" visible="showModal">
+		<form role="form" name="medidasForm">
+
+			<div class="form-group">
+				<label for="peso">Peso (kg)</label> <input type="number" step="0.01"
+					class="form-control" ng-model="medida.peso" id="peso"
+					name="pesoForm" placeholder="Coloque o seu peso atual [0.0]"
+					ng-required="true" />
+
+				<div ng-show="medidasForm.pesoForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Peso</p>
+				</div>
+			</div>
+
+			<div ng-show="medidasForm.pesoForm.$valid" class="form-group">
+				<label for="altura">Altura (cm)</label> <input type="number"
+					name="alturaForm" step="0.01" class="form-control"
+					ng-model="medida.altura" id="altura"
+					placeholder="Coloque a sua altura atual [0.0]" ng-required="true" />
+
+				<div ng-show="medidasForm.alturaForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Altura</p>
+				</div>
+			</div>
+
+			<div ng-show="medidasForm.alturaForm.$valid" class="form-group">
+				<label for="pescoco">Pescoco (cm)</label> <input type="number"
+					step="0.01" class="form-control" ng-model="medida.pescoco"
+					name="pescocoForm" id="pescoco"
+					placeholder="Coloque a largura do seu pescoço [0.0]"
+					ng-required="true" />
+
+				<div ng-show="medidasForm.pescocoForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a largura do Pescoço</p>
+				</div>
+			</div>
+
+			<div ng-show="medidasForm.pescocoForm.$valid" class="form-group">
+				<label for="cintura">Cintura (cm)</label> <input type="number"
+					step="0.01" class="form-control" ng-model="medida.cintura"
+					name="cinturaForm" id="cintura"
+					placeholder="Coloque a largura da sua cintura [0.0]"
+					ng-required="true" />
+
+				<div ng-show="medidasForm.cinturaForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Largura da Cintura</p>
+				</div>
+			</div>
+
+			<div ng-show="medidasForm.cinturaForm.$valid" class="form-group">
+				<label for="quadris">Quadris (cm)</label> <input type="number"
+					step="0.01" class="form-control" ng-model="medida.quadris"
+					name="quadrisForm" id="quadris"
+					placeholder="Coloque a largura dos seus quadris [0.0]"
+					ng-required="true" />
+
+				<div ng-show="medidasForm.quadrisForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Largura dos Quadris</p>
+				</div>
+			</div>
+
+			<div ng-show="medidasForm.quadrisForm.$valid" class="form-group">
+				<label for="data">Data da Medição</label> <input type="date"
+					format-date class="form-control" ng-model="medida.data" id="data"
+					name="dataForm"
+					placeholder="Coloque a data em que registou os valores anteriores" />
+				<div ng-show="medidasForm.dataForm.$invalid"
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Data da Medição</p>
+				</div>
+			</div>
+
+			<button ng-click="updateMedida(medida)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Modificar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+	</div>
+</body>

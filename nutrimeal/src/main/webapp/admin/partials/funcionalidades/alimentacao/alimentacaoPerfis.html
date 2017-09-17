@@ -1,0 +1,119 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1>Planos alimentares dos Utilizadores</h1>
+		</header>
+		<div class="table-responsive">
+			<input class="form-control" type="text" ng-model="searchCriteria"
+				placeholder="Que plano alimentar deseja procurar?" />
+			<table id="example" class="table table-striped table-bordered"
+				cellspacing="50" width="100%" ng-model="perfilalimentarList">
+				<thead>
+					<tr>
+						<th>Utilizador</th>
+						<th>Nome Plano</th>
+						<th>Data</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						ng-repeat="perfilalimentar in perfilalimentarList | filter: searchCriteria | orderBy : rowOrdered :orderDirection">
+						<td>{{perfilalimentar.user.email}} -
+							{{perfilalimentar.user.name}} {{perfilalimentar.user.lastName}}</td>
+						<td>{{perfilalimentar.nome}}</td>
+						<td>{{perfilalimentar.data| date: 'dd-MM-yyyy'}} -
+							{{perfilalimentar.dia}}</td>
+						<td><a class="btn btn-info"
+							ng-click="verRefeicoes(perfilalimentar.id)"> <i
+								class="fa fa-eye" aria-hidden="true"></i> Ver Refeicoes
+						</a> <a class="btn btn-warning"
+							ng-click="deletePerfilalimentar(perfilalimentar.id)"> <i
+								class="fa fa-trash" aria-hidden="true"></i> Apagar
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<hr />
+		<div>
+			<a href="#/alimentacaoPageAdmin" class="btn btn-primary"> <i
+				class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+			</a>
+			<!-- 			<button ng-click="toggleModal()" class="btn btn-success"> -->
+			<!-- 				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar Perfil -->
+			<!-- 			</button> -->
+		</div>
+	</div>
+
+	<!-- 		Modal Perfil -->
+	<modal title="Adicionar Perfil Alimentar" visible="showModal">
+	<form role="form" name="perfilalimentarForm">
+
+		<div class="form-group">
+			<label for="name">Tipo de Perfil</label> <input type="text"
+				class="form-control" ng-model="perfilalimentar.nome" id="name"
+				name="tipoForm" placeholder="Tipo de Perfil" ng-required="true" />
+
+			<div ng-show="perfilalimentarForm.tipoForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Tipo de Perfil Alimentar</p>
+			</div>
+		</div>
+
+		<div class="form-group" ng-show="perfilalimentarForm.tipoForm.$valid">
+			<label for="perfilalimentar.dia">Dia da semana</label> <select
+				name="diaForm" ng-model="perfilalimentar.dia" ng-required="true">
+				<option value="Domingo">Domingo</option>
+				<option value="Segunda-Feira">Segunda-Feira</option>
+				<option value="Terça-Feira">Terça-Feira</option>
+				<option value="Quarta-Feira">Quarta-Feira</option>
+				<option value="Quinta-Feira">Quinta-Feira</option>
+				<option value="Sexta-Feira">Sexta-Feira</option>
+				<option value="Sabado">Sabado</option>
+			</select>
+
+			<div ng-show="perfilalimentarForm.diaForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Dia da Semana</p>
+			</div>
+		</div>
+
+		<div class="form-group" ng-show="perfilalimentarForm.diaForm.$valid">
+			<label for="data">Data do Pefil</label> <input type="date" name="dataForm"
+				class="form-control" ng-model="perfilalimentar.data" id="data"
+				placeholder="Coloque a data para este perfil" />
+
+			<div ng-show="perfilalimentarForm.dataForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Dia da Semana</p>
+			</div>
+		</div>
+
+		<input type="hidden" ng-model="perfilalimentar.user" id="profile"
+			value="{{profile.email}}" />
+
+
+		<button ng-disabled="perfilalimentarForm.$invalid"
+			ng-click="createNewPerfilalimentar(perfilalimentar, profile.email)"
+			class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+		</button>
+
+
+		<button type="button" class="btn btn-danger" ng-click="closePerfil()">
+			<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+		</button>
+	</form>
+	</modal>
+
+
+</body>

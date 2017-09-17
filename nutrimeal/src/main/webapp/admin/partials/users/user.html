@@ -1,0 +1,84 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Detalhes do Utilizador</h1>
+	</header>
+	<img class="img-circle1" ng-if="user.foto"
+		ng-src="data:image/jpeg;base64,{{user.foto}}" alt="Foto de perfil" />
+	<table class="table usertable">
+		<tr>
+			<th><b>Email</b></th>
+			<td>{{user.email}}</td>
+		</tr>
+		<tr>
+			<th><b>Nome Completo</b></th>
+			<td>{{user.name}} {{user.lastName}}</td>
+		</tr>
+
+		<tr>
+			<th><b>Nacionalidade</b></th>
+			<td>{{user.nacionalidade}}</td>
+		</tr>
+		<tr>
+			<th><b>Data Nascimento</b></th>
+			<td>{{user.data_nasc | date: 'dd-MM-yyyy'}}</td>
+		</tr>
+		<tr>
+			<th><b>Idade</b></th>
+			<td>{{user.data_nasc | ageFilter}}</td>
+		</tr>
+		<tr>
+			<td><b>Contacto</b></td>
+			<td>{{user.contacto}}</td>
+		</tr>
+		<tr>
+			<th><b>Localidade</b></th>
+			<td>{{user.localidade}}</td>
+		</tr>
+		<tr>
+			<th><b>CC</b></th>
+			<td>{{user.bi}}</td>
+		</tr>
+		<tr>
+			<th><b>Contribuinte</b></th>
+			<td>{{user.contribuinte}}</td>
+		</tr>
+
+		<tr>
+			<th><b>Permissões</b></th>
+			<td>{{user.role}}</td>
+		</tr>
+
+	</table>
+	<hr />
+	<div ng-controller="UserUpdateController">
+		<a href="#/users" class="btn btn-primary"><i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás</a>
+		<button ng-click="toggleModal()" class="btn btn-danger">
+			<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tornar
+			administrador
+		</button>
+		<modal title="Alterar Permissões" visible="showModal">
+		<form role="form" name="userForm">
+
+			<div align="center" ng-controller="RoleController">
+
+				<h2>Tem a certeza que pretende alterar as permissões do utilizador?</h2>
+				<button class="btn btn-danger" ng-click="setAdmin(user)"
+					onclick="alert('Este Utilizador tornou-se admnistrador da plataforma.')">Sim</button>
+
+
+				<button type="button" class="btn btn-warning" ng-click="close()">
+					<i class="fa fa-times" aria-hidden="true"></i> Não
+				</button>
+			</div>
+		</form>
+		</modal>
+	</div>
+</body>

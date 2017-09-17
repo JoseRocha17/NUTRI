@@ -1,0 +1,210 @@
+
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isUser == 'USER' || profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1 align="center">Perfil Fisico</h1>
+
+		</header>
+		<table class="table perfilFisicoTable">
+
+			<tr>
+				<td>Utilizador</td>
+				<td>{{perfilfisico.user.email}}</td>
+			</tr>
+
+			<tr>
+				<td>Tipo de Perfil</td>
+				<td>{{perfilfisico.nome}}</td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>{{perfilfisico.data| date: 'dd-MM-yyyy'}}
+					({{perfilfisico.dia}})</td>
+			</tr>
+			<tr>
+
+				<td><button ng-click="verExerciciosUserPerfil(perfilfisico.id)"
+						class="btn btn-info">
+						<i class="fa fa-eye" aria-hidden="true"></i> Mostrar Exercicios
+					</button></td>
+			</tr>
+
+		</table>
+
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="50" width="100%" ng-model="perfilExercicioUserList"
+			visible="showTableExercicios">
+			<thead>
+				<tr>
+					<th>Nome do Exercicio</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr ng-repeat="metaexercicio in perfilExercicioUserList">
+					<td>{{metaexercicio.exercicio.nome}}</td>
+					<td><a class="btn btn-info"
+						ng-click="verMetaExercicio(metaexercicio.id)"> <i
+							class="fa fa-eye" aria-hidden="true"></i> Ver Detalhes do
+							Exercicio
+					</a> <a class="btn btn-warning"
+						ng-click="deleteMetaexercicio(metaexercicio.id)"> <i
+							class="fa fa-trash" aria-hidden="true"></i> Apagar
+					</a>
+				</tr>
+
+				<tr>
+					<td>
+						<button ng-click="toggleModalAddExercicio()"
+							class="btn btn-success">
+							<i class="fa fa-plus" aria-hidden="true"></i> Adicionar Exercicio
+							ao Plano
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<a href="#/quantidadesfisicas" class="btn btn-primary"> <i
+				class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+			</a>
+
+			<button ng-click="toggleModalUpdatePerfil()" class="btn btn-success">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Alterar
+				Perfil
+			</button>
+		</div>
+	</div>
+	<div>
+		<modal title="Adicionar Exercicio" visible="showModal">
+		<form role="form" name="metaexercicioForm">
+
+			<div class="form-group">
+				<label for="calorias">Calorias a gastar</label> <input type="number"
+					name="caloriasForm" class="form-control"
+					ng-model="metaexercicio.calorias" id="calorias"
+					placeholder="Coloque o nome do atributo" ng-required="true" />
+
+				<div ng-show="metaexercicioForm.caloriasForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique as Calorias que Deseja
+						Queimar</p>
+				</div>
+			</div>
+
+			<div ng-show="metaexercicioForm.caloriasForm.$valid"
+				class="form-group" ng-controller="ExercicioListController">
+				<label for="metaexercicio.exercicio">Exercicio</label> <select
+					name="exercicioForm" ng-model="metaexercicio.exercicio"
+					ng-required="true"
+					ng-options="exercicio.id as exercicio.nome for exercicio in exercicioList">
+					<option value="">Selecione um exercicio</option>
+				</select>
+
+				<div ng-show="metaexercicioForm.exercicioForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique um Exercicio</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-controller="PerfilfisicoViewController">
+				<input type="hidden" ng-model="metaexercicio.perfil" id="perfil"
+					value="{{perfilfisico.id}}" />
+			</div>
+
+			<button ng-disabled="metaexercicioForm.$invalid"
+				ng-click="createNewMetaexercicio(metaexercicio, perfilfisico.id)"
+				class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+
+
+		<modal title="Modificar Perfil Fisico" visible="showModalUpdatePerfil">
+		<form role="form" name="perfilfisicoForm">
+
+			<div class="form-group">
+				<label for="nome">Tipo de Perfil</label> <input type="text"
+					class="form-control" ng-model="perfilfisico.nome" id="nome"
+					name="tipoForm" placeholder="Coloque o tipo de perfil"
+					ng-required="true" />
+
+				<div ng-show="perfilfisicoForm.tipoForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Tipo de Perfil Fisico</p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="perfilfisico.dia">Dia da semana</label> <select
+					name="diaForm" ng-model="perfilfisico.dia" ng-required="true">
+					<option value="Domingo">Domingo</option>
+					<option value="Segunda-Feira">Segunda-Feira</option>
+					<option value="Terça-Feira">Terça-Feira</option>
+					<option value="Quarta-Feira">Quarta-Feira</option>
+					<option value="Quinta-Feira">Quinta-Feira</option>
+					<option value="Sexta-Feira">Sexta-Feira</option>
+					<option value="Sabado">Sabado</option>
+				</select>
+
+				<div ng-show="perfilfisicoForm.diaForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Dia da Semana</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="perfilfisicoForm.diaForm.$valid">
+				<label for="data">Data do Pefil</label> <input type="date"
+					name="dataForm" class="form-control" ng-model="perfilfisico.data"
+					format-date id="data" placeholder="Coloque a data para este perfil" />
+
+				<div ng-show="perfilfisicoForm.dataForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Data do Perfil</p>
+				</div>
+			</div>
+
+
+			<button ng-disabled="perfilfisicoForm.$invalid"
+				ng-click="updatePerfilfisico(perfilfisico)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Modificar
+			</button>
+
+			<button type="button" class="btn btn-danger"
+				ng-click="closeUpdatePerfil()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+		
+			
+		<!-- 	Modal Apagar Exercicio -->
+	<modal visible="showModalApagar" id="modalApagar">
+
+	<form>
+		<div>
+			<div class="form-group">
+				<label id="Apagar"><h1>Exercicio Excluido Com
+						Sucesso do Plano!</h1></label>
+			</div>
+
+		</div>
+		<button type="button" class="btn btn-success" ng-click="verExerciciosUserPerfil(perfilfisico.id)">
+			<i class="fa fa-times" aria-hidden="true"></i> Ok
+		</button>
+	</form>
+	</modal>
+	</div>
+</body>

@@ -1,0 +1,60 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Utilizadores registados na plataforma</h1>
+	</header>
+	<div class="table-responsive">
+		<input class="form-control" type="text" ng-model="searchCriteria"
+			placeholder="Que utilizador deseja procurar?" />
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="0" width="100%" ng-model="userList">
+			<thead>
+				<tr>
+					<th><a>Nome Completo</a></th>
+					<th><a>Email</a></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					ng-repeat="user in userList | filter: searchCriteria ">
+					<td>{{user.name}} {{user.lastName}}</td>
+					<td>{{user.email}}</td>
+					<td><a class="btn btn-info" ng-click="editUser(user.email)">
+							<i class="fa fa-search-plus" aria-hidden="true"></i> Ver Perfil
+					</a> <a class="btn btn-warning" ng-click="deleteUser(user.email)">
+							<i class="fa fa-trash" aria-hidden="true"></i> Apagar
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<hr />
+	<div>
+		<a href="#/main" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+	</div>
+
+	<!-- 	Modal Apagar Novidade -->
+	<modal visible="showModalApagar" id="modalApagar">
+
+	<form>
+		<div>
+			<div class="form-group">
+				<label id="Apagar"><h1>Utilizador Excluido com Sucesso!</h1></label>
+			</div>
+
+		</div>
+		<button type="button" class="btn btn-success" ng-click="closeApagar()">
+			<i class="fa fa-times" aria-hidden="true"></i> Ok
+		</button>
+	</form>
+	</modal>
+</body>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>nutrimeal</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>InicialServlet</servlet-name>
+		<servlet-class>pt.ipb.nutrimeal.servlets.InicialServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>pt.ipb.nutrimeal.ws</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<url-pattern>/ws/v1/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Register Servlet</servlet-name>
+		<servlet-class>pt.ipb.nutrimeal.servlets.RegistoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Register Servlet</servlet-name>
+		<url-pattern>register</url-pattern>
+		<url-pattern>/admin/register</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddPhoto</servlet-name>
+		<servlet-class>pt.ipb.nutrimeal.servlets.AdicionarFotoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddPhoto</servlet-name>
+		<url-pattern>addphoto</url-pattern>
+		<url-pattern>/admin/addphoto</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Verify Servlet</servlet-name>
+		<servlet-class>pt.ipb.nutrimeal.servlets.VerificacaoRegistoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Verify Servlet</servlet-name>
+		<url-pattern>verify</url-pattern>
+		<url-pattern>/admin/verify</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Logout Servlet</servlet-name>
+		<servlet-class>pt.ipb.nutrimeal.servlets.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout Servlet</servlet-name>
+		<url-pattern>logout</url-pattern>
+		<url-pattern>/admin/logout</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Plano Alimentar</servlet-name>
+		<servlet-class>pt.ipb.nutrimeal.servlets.PlanoAlimentarServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Plano Alimentar</servlet-name>
+		<url-pattern>planoalimentar</url-pattern>
+		<url-pattern>/admin/planoalimentar</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Plano Fisico</servlet-name>
+		<servlet-class>pt.ipb.nutrimeal.servlets.PlanoFisicoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Plano Fisico</servlet-name>
+		<url-pattern>planofisico</url-pattern>
+		<url-pattern>/admin/planofisico</url-pattern>
+	</servlet-mapping>
+
+	<security-role>
+		<role-name>USER</role-name>
+	</security-role>
+	<security-role>
+		<role-name>ADMIN</role-name>
+	</security-role>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>resources</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>register</display-name>
+		<web-resource-collection>
+			<web-resource-name>nutrimealRegister</web-resource-name>
+			<url-pattern>/#/register.html</url-pattern>
+			<url-pattern>/#/registered.html</url-pattern>
+			<url-pattern>/#/verify</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>AdminConstraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>admin</web-resource-name>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMIN</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>UserConstraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>/user/</web-resource-name>
+			<url-pattern>/user/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>USER</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>nutrimealRealm</realm-name>
+		<form-login-config>
+			<form-login-page>/#/login</form-login-page>
+			<form-error-page>/#/loginError</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<resource-ref>
+		<res-ref-name>mail/nutrimeal</res-ref-name>
+		<res-type>javax.mail.Session</res-type>
+		<res-auth>Application</res-auth>
+	</resource-ref>
+	<resource-ref>
+		<description>nutrimeal Datasource</description>
+		<res-ref-name>jdbc/nutrimeal</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+</web-app>

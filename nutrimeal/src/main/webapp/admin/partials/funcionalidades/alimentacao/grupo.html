@@ -1,0 +1,65 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+<header>
+<h1>Grupo Alimentar</h1>
+</header>
+
+<body>
+	<div ng-if="profile.isAdmin == 'ADMIN'">
+
+		<table class="table grupoTable">
+
+			<tr>
+				<th>Nome</th>
+				<td>{{grupo.nome}}</td>
+			</tr>
+
+		</table>
+		<hr />
+
+		<div>
+
+			<a href="#/alimentosAdmin" class="btn btn-primary"> <i
+				class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+			</a>
+
+			<button ng-click="toggleModalUpdateGrupo()"
+				class="btn btn-success">
+				<i class="fa fa-file-image-o" aria-hidden="true"></i> Update
+			</button>
+		</div>
+	</div>
+	<div>
+		<!-- 		Modal Update Grupo Alimentar -->
+		<modal title="Adicionar grupo" visible="showModalUpdate">
+		<form role="form" name="grupoForm">
+
+			<div class="form-group">
+				<label for="nome">Nome</label> <input type="text"
+					class="form-control" ng-model="grupo.nome" id="nome"
+					name="nomeForm" placeholder="Coloque o nome do grupo"
+					ng-required="true" />
+
+				<div ng-show="grupoForm.nomeForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Nome do Grupo Alimentar</p>
+				</div>
+			</div>
+
+			<button ng-disabled="grupoForm.$invalid"
+				ng-click="updateGrupo(grupo)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="closeUpdate()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+
+	</div>
+</body>

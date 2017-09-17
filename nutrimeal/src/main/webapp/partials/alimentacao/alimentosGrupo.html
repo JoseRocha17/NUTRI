@@ -1,0 +1,71 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isUser == 'USER' || profile.isAdmin == 'ADMIN'">
+		<h1>Escolha um Grupo dos alimentos</h1>
+		<div class="table-responsive">
+			<input class="form-control" type="text" ng-model="searchCriteria"
+				placeholder="Que alimento deseja procurar?" />
+			<table id="example" class="table table-striped table-bordered"
+				cellspacing="50" width="100%" ng-model="alimentoList">
+				<thead>
+					<tr>
+						<th>Grupo</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr ng-repeat="grupo in gruposList | filter: searchCriteria">
+						<td>{{grupo.nome}}</td>
+
+						<td><a class="btn btn-info"
+							ng-click="verAlimentosGrupo(grupo.id)"> <i class="fa fa-eye"
+								aria-hidden="true"></i> Ver Alimentos do Grupo
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="50" width="100%" ng-model="alimentoGrupoList"
+			visible="showTableGrupoAlimentos">
+			<thead>
+				<tr>
+					<th>Alimento</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="alimento in alimentoGrupoList">
+					<td>{{alimento.nome}}</td>
+					<td><a class="btn btn-info"
+						ng-click="editAlimento(alimento.id)"> <i class="fa fa-eye"
+							aria-hidden="true"></i> Ver Informação Nutricional
+					</a></td>
+
+				</tr>
+				<tr>
+
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+
+
+	</div>
+
+
+
+
+
+</body>

@@ -1,0 +1,6 @@
+body {
+	background: url('/resources/images/passwordError.jpg') no-repeat fixed
+		center center;
+	background-size: cover;
+	font-family: Jura;
+}

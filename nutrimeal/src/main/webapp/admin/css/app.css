@@ -1,0 +1,195 @@
+.container-fluid {
+	font: 20px;
+	margin: 0;
+}
+
+.contentMain{
+	min-height: 950px;
+}
+
+.imgNovidade {
+	width: 80%;
+	height: 70%;
+	display: block;
+	margin: 0 auto;
+	border-radius: 10px;
+}
+
+
+.xpto {
+	top: 15px;
+}
+
+.xptoPhoto {
+	top: 20px;
+	right: 5px;
+}
+
+.xptoName {
+	top: 15px;
+}
+
+.xptoRole {
+	top: 15px;
+	right: 10px;
+}
+.fa {
+	color: #000000;
+}
+
+.dropdown {
+	top: 15px;
+	left: 250px;
+	color: #000000;
+	position: absolute;
+}
+
+
+.dropdown-toggle {
+	color: #000000;
+}
+
+body {
+	padding-top: 105px;
+	width: 100%;
+	max-width: 100%;
+}
+
+
+.navbar-default .navbar-nav>li>a {
+	color: orange;
+}
+
+.navbar-fixed-top {
+	background-color: #000000;
+}
+
+.footer-distributed {
+	background-color: #000000;
+}
+
+.footer-distributed .span {
+	color: orange;
+}
+
+.navbar-nav {
+	background-color: #000000;
+}
+
+.logo {
+	height: auto;
+	width: auto;
+	max-width: 100%;
+	min-width: 100%;
+	max-heigth: 100%;
+	min-heigth: 100%;
+	background-size: 100%;
+}
+
+
+
+.img-circle {
+	border-radius: 50%;
+	height: 75px;
+	width: 75px;
+}
+
+.img-circle {
+	height: 30px;
+	width: 30px;
+}
+
+#adminPhoto {
+	top: 7px;
+}
+
+.tdBold {
+	font-weight: bold;
+}
+
+.img-circle1 {
+	width: 100px;
+	height: 100px;
+	border: 3px solid #fff;
+	position: relative;
+	box-shadow: 0 1px 1px rgba(136, 153, 166, 0.15);
+	border-radius: 20px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.btn-default{
+	font-size: 20px;
+}
+
+img {
+	max-width: 100%;
+	/* 	height:auto; */
+}
+
+.form-group input {
+    box-sizing: border-box;
+	border-radius: 2px;
+	border: 3px solid orange;
+	margin-bottom: 20px;
+	font-size: 18px;
+	padding: 0 5px 0 25px;
+	outline: none;
+}
+
+a {
+	color: orange;
+}
+
+h1{
+	text-align: center;
+}
+
+/* Novidades */
+#novidadeColumnData { 
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 1px orange;
+    line-height: 1.8;
+    font-size: 40px;
+}
+#novidadeColumnTitulo { 
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 3px 1px orange;
+    line-height: 2;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#novidadeColumnBreveDescricao { 
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 1px orange;
+    line-height: 1.4;
+    font-size: 35px;
+    font-style: italic;
+/*     background-color: yellow; */
+}
+
+#novidadeColumnDescricao { 
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+/*     text-shadow: 2px 1px orange; */
+    line-height: 1.4;
+    font-size: 25px;
+}
+
+#NovidadeTable { 
+	height: 50px;
+}
+
+h1{
+	text-align: center;
+	color: orange;
+}
+

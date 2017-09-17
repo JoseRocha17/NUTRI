@@ -1,0 +1,9 @@
+
+.imgAlimento{
+	width : 20%;
+	height : 20%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}

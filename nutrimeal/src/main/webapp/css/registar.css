@@ -1,0 +1,93 @@
+footer {
+	position: static;
+}
+
+.ajustarRegisto {
+position: static;
+}
+
+
+.logo {
+	margin-top: 100px;
+    width: 213px;
+    height: 36px;
+    margin: 30px auto;
+    display: none;
+}
+
+.input-xlarge{
+	height: 30px;
+}
+
+.help-block{
+	font-size: 16px;
+	padding: 3px;
+}
+
+.register-block {
+	width: 390px;
+	padding: 20px;
+	background: #fff;
+	border-radius: 5px;
+	margin: 0 auto;
+}
+
+.register-block h1 {
+	text-align: center;
+	font-size: 70px bold;
+}
+
+.register-block input {
+
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 3px solid orange;
+    margin-bottom: 20px;
+    font-size: 18px;
+    padding: 0 5px 0 25px;
+    outline: none;
+    width: 350px;
+}
+
+.register-block .form-register-heading {
+	text-align: center;
+}
+
+.register-block input#username {
+    background-size: 18px 80px;
+}
+
+.register-block input#username:focus {
+    background-size: 18px 80px;
+}
+
+.register-block input#password {
+    background-size: 18px 80px;
+}
+
+.register-block input#password:focus {
+    background-size: 18px 80px;
+}
+
+.register-block input:active, .register-block input:focus {
+    border: 3px solid orange;
+}
+
+.register-block button {
+    width: 100%;
+}
+
+.register-block button:hover {
+    background: orange;
+}
+
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+
+.form-register-heading {
+	font-size: 20px;	
+}

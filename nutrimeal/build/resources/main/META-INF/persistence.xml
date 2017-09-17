@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="nutrimeal-pu"
+		transaction-type="RESOURCE_LOCAL">
+		<non-jta-data-source>jdbc/nutrimeal</non-jta-data-source>
+
+		<class>pt.ipb.nutrimeal.entity.User</class>
+		<class>pt.ipb.nutrimeal.entity.Alimento</class>
+		<class>pt.ipb.nutrimeal.entity.Exercicio</class>
+		<class>pt.ipb.nutrimeal.entity.Medidas</class>
+		<class>pt.ipb.nutrimeal.entity.Objetivos</class>
+		<class>pt.ipb.nutrimeal.entity.Refeicao</class>
+		<class>pt.ipb.nutrimeal.entity.Group</class>
+		<class>pt.ipb.nutrimeal.entity.PerfilAlimentar</class>
+		<class>pt.ipb.nutrimeal.entity.QuantidadeAlimentar</class>
+		<class>pt.ipb.nutrimeal.entity.PerfilFisico</class>
+		<class>pt.ipb.nutrimeal.entity.PlanoFisico</class>
+		<class>pt.ipb.nutrimeal.entity.MetaExercicio</class>
+		<class>pt.ipb.nutrimeal.entity.Atributo</class>
+		<class>pt.ipb.nutrimeal.entity.ExercicioAtributo</class>
+		<class>pt.ipb.nutrimeal.entity.Novidade</class>
+		<class>pt.ipb.nutrimeal.entity.Promocao</class>
+		<class>pt.ipb.nutrimeal.entity.Grupo</class>
+		<class>pt.ipb.nutrimeal.entity.GrupoAlimento</class>
+		<class>pt.ipb.nutrimeal.entity.Pedidos</class>
+		<properties>
+
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+		</properties>
+
+	</persistence-unit>
+</persistence>

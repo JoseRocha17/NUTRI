@@ -1,0 +1,168 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1 align="center">{{refeicao.nome}}</h1>
+			<br>
+		</header>
+		<table id="example" class="table planoAlimentarAdmin">
+			<tr>
+				<th>Utilizador</th>
+				<td>{{refeicao.perfilalimentar.user.email}} -
+					{{refeicao.perfilalimentar.user.name}}
+					{{refeicao.perfilalimentar.user.lastName}}</td>
+			</tr>
+			<tr>
+				<th>Refeicao</th>
+				<td>{{refeicao.nome}}</td>
+			</tr>
+			<tr>
+				<th>Tipo Perfil</th>
+				<td>{{refeicao.perfilalimentar.nome}}</td>
+			</tr>
+			<tr>
+				<th>Data Perfil</th>
+				<td>{{refeicao.perfilalimentar.data | date: 'dd-MM-yyyy'}} -
+					{{refeicao.perfilalimentar.dia}}</td>
+			</tr>
+			<tr>
+				<th>Alimentos a consumir:</th>
+				<td><button ng-click="verQuantidadesRefeicoes(refeicao.id)"
+						class="btn btn-info">
+						<i class="fa fa-eye" aria-hidden="true"></i> Mostrar Alimentos
+					</button></td>
+			</tr>
+		</table>
+		<table id="example" class="table table-striped table-bordered"
+			cellspacing="50" width="100%" ng-model="quantidadeRefeicaoUserList"
+			visible="showTableQuantidadesRefeicoes">
+			<thead>
+				<tr>
+					<th>Nome Alimento</th>
+					<th>Quantidade a consumir</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="quantidadealimentar in quantidadeRefeicaoUserList">
+					<td>{{quantidadealimentar.alimento.nome}}</td>
+					<td>{{quantidadealimentar.quantidade}}
+						{{quantidadealimentar.atributo}}</td>
+					<td><a class="btn btn-warning"
+						ng-click="deleteQuantidadealimentar(quantidadealimentar.id)">
+							<i class="fa fa-trash" aria-hidden="true"></i> Apagar
+					</a></td>
+				</tr>
+				<tr>
+					<td>
+						<button ng-click="toggleModalQuantidade()" class="btn btn-success">
+							<i class="fa fa-plus" aria-hidden="true"></i> Adicionar Alimento
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<button
+				ng-click="voltarAtrasCreateAdmin(refeicao.perfilalimentar.id)"
+				class="btn btn-primary">
+				<i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar atrás
+			</button>
+
+		</div>
+	</div>
+	<div>
+		<modal title="Adicionar Medida" visible="showModalQuantidade">
+		<form role="form" name="quantidadealimentarForm">
+
+			<div class="form-group">
+
+				<div class="form-group">
+					<label for="quantidade">Quantidade a consumir</label> <input
+						type="number" class="form-control" name="quantidadeForm"
+						ng-model="quantidadealimentar.quantidade" id="quantidade"
+						placeholder="Coloque a quantidade a consumir do alimento"
+						ng-required="true" />
+
+					<div ng-show="quantidadealimentarForm.quantidadeForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Insira a Quantidade a Consumir</p>
+					</div>
+				</div>
+
+				<div ng-show="quantidadealimentarForm.quantidadeForm.$valid"
+					class="form-group">
+					<label for="quantidadealimentar.atributo">Atributo</label> <select
+						name="atributoForm" ng-model="quantidadealimentar.atributo"
+						ng-required="true">
+						<option value="Gramas">Gramas</option>
+						<option value="Unidades">Unidades</option>
+						<option value="ml">ml</option>
+					</select>
+
+
+					<div ng-show="quantidadealimentarForm.atributoForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Selecione um Atributo</p>
+					</div>
+
+				</div>
+
+
+				<div class="form-group" ng-controller="RefeicaoViewController">
+					<input type="hidden" ng-model="quantidadealimentar.refeicao"
+						id="refeicao" value="{{refeicao.id}}" />
+				</div>
+
+				<div ng-show="quantidadealimentarForm.atributoForm.$valid"
+					class="form-group" ng-controller="AlimentoListController">
+					<label for="quantidadealimentar.alimento">Alimento</label> <select
+						name="alimentoForm" ng-model="quantidadealimentar.alimento"
+						ng-required="true"
+						ng-options="alimento.id as alimento.nome for alimento in alimentoList">
+						<option value="">Seleciona um alimento</option>
+					</select>
+
+					<div ng-show="quantidadealimentarForm.alimentoForm.$invalid "
+						class="alert alert-danger">
+						<p class="alertas">Por Favor Indique um Alimento</p>
+					</div>
+				</div>
+
+				<button ng-disabled="quantidadealimentarForm.$invalid"
+					ng-click="createNewQuantidadealimentar(quantidadealimentar, refeicao.id)"
+					class="btn btn-success">
+					<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+				</button>
+
+				<button type="button" class="btn btn-danger"
+					ng-click="closeQuantidade()">
+					<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+				</button>
+			</div>
+		</form>
+		</modal>
+
+		<!-- 		Modal Apagar -->
+		<modal visible="showModalApagar" id="modalApagar">
+
+		<form>
+			<div>
+				<div class="form-group">
+					<label id="Apagar"><h1>Alimento Excluido Com Sucesso!</h1></label>
+				</div>
+
+			</div>
+			<button type="button" class="btn btn-success"
+				ng-click="verQuantidadesRefeicoes(refeicao.id)">
+				<i class="fa fa-times" aria-hidden="true"></i> Ok
+			</button>
+		</form>
+		</modal>
+	</div>
+</body>

@@ -1,0 +1,58 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Detalhes dos Atributos</h1>
+	</header>
+	<table class="table atributoTable">
+
+
+		<tr>
+			<th><h3>Nome</h3></th>
+
+		</tr>
+		<tr>
+			<td>{{atributo.nome}}</td>
+		</tr>
+
+	</table>
+	<hr />
+	<div>
+		<a href="#/exercicios" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Alterar
+		</button>
+		<modal title="Alterar Atributo" visible="showModal">
+		<form role="form" name="atributoForm">
+
+			<div class="form-group">
+				<label for="nome">Nome</label> <input type="text" name="nomeForm"
+					class="form-control" ng-model="atributo.nome" id="nome"
+					placeholder="Coloque o nome do atributo" ng-required="true" />
+
+				<div ng-show="atributoForm.nomeForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Nome do Atributo</p>
+				</div>
+			</div>
+
+
+			<button ng-click="updateAtributo(atributo)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Modificar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+		</form>
+		</modal>
+
+	</div>
+</body>

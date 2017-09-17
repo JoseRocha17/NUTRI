@@ -1,0 +1,117 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<!-- <link rel="stylesheet" href="css/profile.css"> -->
+<script src="js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isUser == 'USER' || profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1>Planos Fisicos</h1>
+		</header>
+		<div class="table-responsive">
+			<input class="form-control" type="text" ng-model="searchCriteria"
+				placeholder="Que plano fisico deseja procurar?" />
+			<table id="example" class="table table-striped table-bordered"
+				cellspacing="50" width="100%" ng-model="perfilfisicoList">
+
+				<thead>
+					<tr>
+						<th>Nome Perfil</th>
+						<th>Data</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr
+						ng-repeat="perfilfisico in perfilfisicoList | filter: searchCriteria ">
+						<td>{{perfilfisico.nome}}</td>
+						<td>{{perfilfisico.data| date: 'dd-MM-yyyy'}} -
+							{{perfilfisico.dia}}</td>
+						<td><a class="btn btn-info"
+							ng-click="addExercicio(perfilfisico.id)"> <i
+								class="fa fa-eye" aria-hidden="true"></i> Ver Exercicios
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<hr />
+		<div>
+			<a href="#/exercicioPage" class="btn btn-primary"> <i
+				class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+			</a>
+			<button ng-click="toggleModal()" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar Perfil
+				Fisico
+			</button>
+		</div>
+	</div>
+
+
+	<!-- 		Modal Perfil Fisico -->
+	<modal title="Adicionar Perfil Fisico" visible="showModal">
+	<form role="form" name="perfilfisicoForm">
+
+		<div class="form-group">
+			<label for="nome">Tipo de Perfil</label> <input type="text"
+				name="tipoForm" class="form-control" ng-model="perfilfisico.nome"
+				id="peso" placeholder="Coloque o tipo de perfil" ng-required="true" />
+
+			<div ng-show="perfilfisicoForm.tipoForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Tipo de Perfil Fisico</p>
+			</div>
+		</div>
+
+		<div ng-show="perfilfisicoForm.tipoForm.$valid" class="form-group">
+			<label for="perfilfisico.dia">Dia da semana</label> <select
+				name="diaForm" ng-model="perfilfisico.dia" ng-required="true">
+				<option value="Domingo">Domingo</option>
+				<option value="Segunda-Feira">Segunda-Feira</option>
+				<option value="Terça-Feira">Terça-Feira</option>
+				<option value="Quarta-Feira">Quarta-Feira</option>
+				<option value="Quinta-Feira">Quinta-Feira</option>
+				<option value="Sexta-Feira">Sexta-Feira</option>
+				<option value="Sabado">Sabado</option>
+			</select>
+
+			<div ng-show="perfilfisicoForm.diaForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique o Dia da Semana</p>
+			</div>
+		</div>
+
+		<div ng-show="perfilfisicoForm.diaForm.$valid" class="form-group">
+			<label for="data">Data do Pefil</label> <input type="date"
+				name="dataForm" class="form-control" ng-model="perfilfisico.data"
+				id="data" placeholder="Coloque a data para este perfil" />
+
+			<div ng-show="perfilfisicoForm.dataForm.$invalid "
+				class="alert alert-danger">
+				<p class="alertas">Por Favor Indique a Data do Perfil</p>
+			</div>
+		</div>
+
+		<input type="hidden" ng-model="perfilfisico.user" id="profile"
+			value="{{profile.email}}" />
+
+		<button ng-disabled="perfilfisicoForm.$invalid"
+			ng-click="createNewPerfilfisico(perfilfisico, profile.email)"
+			class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+		</button>
+
+		<button type="button" class="btn btn-danger" ng-click="close()">
+			<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+		</button>
+	</form>
+	</modal>
+
+
+
+</body>

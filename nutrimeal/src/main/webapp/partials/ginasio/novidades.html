@@ -1,0 +1,39 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/modal.js"></script>
+</head>
+<body>
+
+	<header>
+		<h1>Novidades</h1>
+	</header>
+	<div class="table-responsive">
+		<table id="NovidadeTable" class="table table-striped table-bordered"
+			cellspacing="50" width="100%" ng-model="novidadesList">
+			<tbody>
+			<tr>
+			<th>Titulo</th>
+			<th>Breve Descricao</th>
+			</tr>
+				<tr
+					ng-repeat="novidade in novidadesList | filter: searchCriteria">
+					<td>{{novidade.titulo}}</td>
+					<td>{{novidade.brevedesc}}</td>
+					<td><a class="btn btn-info"
+						ng-click="editNovidadeUser(novidade.id)"> <i
+							class="fa fa-search-plus" aria-hidden="true"></i> Consultar
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<hr />
+	<div>
+		<a href="#/main" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+	</div>
+</body>

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt-PT" ng-app="nutriApp">
+<!-- ADMIN -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrimeal</title>
+<link rel="shortcut icon" href="/resources/images/icon_imagem.png">
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+<script src="/js/angular.js"></script>
+<script src="/js/angular-route.js"></script>
+<script src="/js/angular-resource.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/angular-md5.js"></script>
+
+
+<script src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/jquery.flexisel.js"></script>
+<script type="text/javascript" src="/js/flexise.js"></script>
+<!-- 	BOOTSTRAP -->
+<script src="/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+<script src="/js/controllers/grupoControllers.js"></script>
+<script src="/js/services/grupoServices.js"></script>
+
+<script src="/js/controllers/pedidosControllers.js"></script>
+<script src="/js/services/pedidosServices.js"></script>
+
+<script src="/js/controllers/promocaoControllers.js"></script>
+<script src="/js/services/promocaoServices.js"></script>
+
+<script src="/js/controllers/novidadeControllers.js"></script>
+<script src="/js/services/novidadeServices.js"></script>
+
+<script src="/js/controllers/quantidadeFisicaControllers.js"></script>
+<script src="/js/controllers/exercicioatributoControllers.js"></script>
+<script src="/js/services/exercicioatributoServices.js"></script>
+
+<script src="/js/controllers/atributoControllers.js"></script>
+<script src="/js/services/atributoServices.js"></script>
+
+<script src="/js/controllers/quandidadealimentarControllers.js"></script>
+<script src="/js/services/quantidadealimentarServices.js"></script>
+
+<script src="/js/controllers/perfilalimentarControllers.js"></script>
+<script src="/js/services/perfilalimentarServices.js"></script>
+
+<script src="/js/controllers/perfilfisicoControllers.js"></script>
+<script src="/js/services/perfilfisicoServices.js"></script>
+
+<!-- <script src="/js/controllers/planofisicoControllers.js"></script> -->
+<!-- <script src="/js/services/planofisicoServices.js"></script> -->
+
+<script src="/js/controllers/refeicaoalimentoControllers.js"></script>
+<script src="/js/services/refeicaoalimentoServices.js"></script>
+
+<script src="/js/controllers/alimentacaoControllers.js"></script>
+
+<script src="/js/controllers/planosalimentaresControllers.js"></script>
+<script src="/js/controllers/alimentoInformacaoControllers.js"></script>
+<script src="/js/controllers/alimentoControllers.js"></script>
+<script src="/js/services/alimentoServices.js"></script>
+
+<script src="/js/controllers/medidasControllers.js"></script>
+<script src="/js/services/medidasServices.js"></script>
+
+<script src="/js/controllers/refeicaoControllers.js"></script>
+<script src="/js/services/refeicaoServices.js"></script>
+
+<script src="/js/controllers/planoalimentarControllers.js"></script>
+<script src="/js/services/planoalimentarServices.js"></script>
+
+<script src="/js/controllers/metaexercicioControllers.js"></script>
+<script src="/js/services/metaexercicioServices.js"></script>
+
+<script src="/js/controllers/objetivosControllers.js"></script>
+<script src="/js/services/objetivosServices.js"></script>
+
+<script src="/js/controllers/exercicioControllers.js"></script>
+<script src="/js/services/exercicioServices.js"></script>
+
+<script src="/js/controllers/pessoaControllers.js"></script>
+<script src="/js/services/pessoaServices.js"></script>
+
+<script src="/js/controllers/userControllers.js"></script>
+<script src="/js/services/userServices.js"></script>
+
+<script src="/js/controllers/roleControllers.js"></script>
+<script src="/js/services/roleServices.js"></script>
+
+
+<!--         CSS -->
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="/css/social.css">
+<link rel="stylesheet" href="/css/font-awesome.css" />
+<link rel="stylesheet" href="/css/footer.css">
+
+
+<link rel="stylesheet" type="text/css"
+	href="//fonts.googleapis.com/css?family=Jura:n,b,i,bi|Play:n,b,i,bi|&amp;subset=latin">
+<link rel="stylesheet" type="text/css"
+	href="https://static.parastorage.com/services/santa/1.1149.25/static/css/user-site-fonts/latin.css">
+<script
+	src="https://static.parastorage.com/services/third-party/requirejs/2.1.15/require.min.js"></script>
+<script
+	src="https://static.parastorage.com/services/santa/1.1149.25/app/main-r.min.js"></script>
+<link rel="stylesheet"
+	href="https://static.parastorage.com/services/santa/1.1149.25/static/css/viewer.css">
+
+<script>
+	$(function() {
+		var pull = $('#pull');
+		menu = $('nav ul');
+		menuHeight = menu.height();
+		$(pull).on('click', function(e) {
+			e.preventDefault();
+			menu.slideToggle();
+		});
+		$(window).resize(function() {
+			var w = $(window).width();
+			if (w > 320 && menu.is(':hidden')) {
+				menu.removeAttr('style');
+			}
+		});
+	});
+</script>
+
+<style>
+.logo {
+	display: none;
+}
+</style>
+
+</head>
+
+<body ng-controller="ProfileController">
+	<div id="main">
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#navbar"
+							aria-expanded="false" aria-controls="navbar" id="pull">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+							<!--                                 <i class="fa fa-caret-down"></i> -->
+						</button>
+						<p>
+							<a href="#/main"> <img src="/resources/images/logotipo.png"
+								alt="" />
+							</a>
+						<p>
+					</div>
+
+					<ul class="nav navbar-nav">
+						<li class="xpto"><a href="/" class="xpto"><i
+								class="glyphicon glyphicon-home"></i> Home </a></li>
+
+						<li class="xpto"><a href="#/users" class="xpto"><i
+								class="glyphicon glyphicon-user"></i> Utilizadores</a></li>
+
+						<li class="xpto"><a class="xpto" data-toggle="dropdown">
+								<i class="glyphicon glyphicon-tower"> </i> Ginasio <i
+								class="glyphicon glyphicon-triangle-bottom"></i>
+						</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#/novidadesAdmin" class="xpto"><i ></i>
+										Novidades</a></li>
+
+								<li><a href="#/promocoesAdmin" class="xpto"><i></i>
+										Promocoes</a></li>
+
+								<li><a href="#/pedidosAdmin" class="xpto"><i></i>
+										Pedidos</a></li>
+
+
+							</ul></li>
+
+
+						<li class="xpto"><a class="xpto" data-toggle="dropdown">
+								<i class="glyphicon glyphicon-hourglass"> </i> Planeamentos <i
+								class="glyphicon glyphicon-triangle-bottom"></i>
+						</a>
+							<ul class="dropdown-menu dropdown-objetivos">
+								<li><a href="#/medicoes" class="xpto"><i></i> Medidas
+										Recentes</a></li>
+
+
+								<li><a href="#/objetivos" class="xpto"> <i></i>
+										Objetivos
+								</a></li>
+
+
+							</ul></li>
+
+
+						<li class="xpto"><a class="xpto" data-toggle="dropdown">
+								<i class="glyphicon glyphicon-heart"> </i> Gestão Planos <i
+								class="glyphicon glyphicon-triangle-bottom"></i>
+						</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#/alimentacaoPageAdmin" class="xpto"><i></i>
+										Planos Alimentares</a></li>
+
+								<li><a href="#/exercicioFisicoPageAdmin" class="xpto"><i></i>
+										Planos Fisicos</a></li>
+
+							</ul></li>
+
+
+
+
+
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+
+
+		<!-- PARTIALS -->
+
+		<div class="container-fluid">
+			<div class="row top-buffer">
+				<div class="col-xs-8 col-xs-offset-2">
+					<div class="contentMain" ng-view></div>
+				</div>
+			</div>
+		</div>
+
+		<br /> <br />
+	</div>
+	<footer class="footer-distributed">
+		<div class="footer-left">
+			<h3>
+				<span> BudoGym</span>
+			</h3>
+			<p class="footer-copyright">© 2017 BudoGym.</p>
+		</div>
+		<div class="footer-right">
+			<div>
+				<i class="fa fa-map-marker"></i>
+				<p>
+					<span>R. Miguel Torga 22, 5300-111 Bragança</span>
+				</p>
+			</div>
+			<div>
+				<i class="fa fa-phone"></i>
+				<p>
+					<span>Contato</span>273 333 626
+				</p>
+			</div>
+			<div>
+				<i class="fa fa-envelope"></i>
+				<p>
+					<a href="mailto:budogym@gmail.com">budogym@gmail.com</a>
+				</p>
+			</div>
+		</div>
+
+	</footer>
+</body>
+</html>

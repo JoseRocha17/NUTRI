@@ -1,0 +1,223 @@
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="css/entity.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="/js/modal.js"></script>
+</head>
+<body>
+	<div ng-if="profile.isAdmin == 'ADMIN'">
+		<header>
+			<h1>Alimentos</h1>
+		</header>
+		<div class="table-responsive">
+			<input class="form-control" type="text" ng-model="searchCriteria"
+				placeholder="Que alimento deseja procurar?" />
+			<table id="example" class="table table-striped table-bordered"
+				cellspacing="0" width="100%" ng-model="alimentoList">
+				<thead>
+					<tr>
+						<th><a href="" ng-click="orderBy('nome')">Nome Alimento</a></th>
+						<th><a>Calorias</a></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr
+						ng-repeat="alimento in alimentoList | filter: searchCriteria | orderBy : rowOrdered :orderDirection">
+						<td>{{alimento.nome}}</td>
+						<td>{{alimento.calorias}}</td>
+
+						<td><a class="btn btn-info"
+							ng-click="editAlimentoAdmin(alimento.id)"> <i
+								class="fa fa-search-plus" aria-hidden="true"></i> Ver Informação
+								Nutricional
+						</a> <a class="btn btn-warning" ng-click="deleteAlimento(alimento.id)">
+								<i class="fa fa-search-plus" aria-hidden="true"></i> Apagar
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<hr />
+	<div>
+		<a href="#/alimentacaoPage" class="btn btn-primary"> <i
+			class="fa fa-arrow-left" aria-hidden="true"></i> Voltar Atrás
+		</a>
+		<button ng-click="toggleModal()" class="btn btn-success">
+			<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+		</button>
+		<modal title="Adicionar Alimento" visible="showModal">
+		<form role="form" name="alimentoForm">
+			<div class="form-group">
+
+				<label for="nome"><h1>Nome</h1> </label> <input type="text"
+					class="form-control" ng-model="alimento.nome" id="nome"
+					name="nomeForm" placeholder="Coloque o nome do alimento "
+					ng-required="true" />
+
+				<div ng-show="alimentoForm.nomeForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Nome do Alimento</p>
+				</div>
+
+			</div>
+
+			<div class="form-group" ng-show="alimentoForm.nomeForm.$valid"
+				ng-controller="GrupoListController">
+				<label for="alimento.grupo">Grupo</label> <select name="grupoForm"
+					ng-model="alimento.grupo" ng-required="true"
+					ng-options="grupo.id as grupo.nome for grupo in gruposList">
+					<option value="">Seleciona um grupo</option>
+				</select>
+
+				<div ng-show="alimentoForm.grupoForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Grupo do Alimento</p>
+				</div>
+			</div>
+
+
+			<div class="form-group" ng-show="alimentoForm.grupoForm.$valid">
+				<label for="nome">Calorias /100g</label> <input type="text"
+					class="form-control" ng-model="alimento.calorias" id="calorias"
+					name="caloriasForm" placeholder="Coloque o valor calorico"
+					ng-required="true" />
+
+				<div ng-show="alimentoForm.caloriasForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique as Calorias do Alimento
+						/100g</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="alimentoForm.caloriasForm.$valid">
+				<label for="nome">Gordura</label> <input type="text"
+					name="gorduraForm" class="form-control" ng-model="alimento.gordura"
+					id="gordura" placeholder="Coloque a gordura do alimento"
+					ng-required="true" />
+
+				<div ng-show="alimentoForm.gorduraForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Gordura do Alimento</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="alimentoForm.gorduraForm.$valid">
+
+				<label for="nome">Colestrol</label> <input type="text"
+					name="colestrolForm" class="form-control"
+					ng-model="alimento.colestrol" id="colestrol"
+					placeholder="Coloque o valor do colestrol" ng-required="true" />
+
+				<div ng-show="alimentoForm.colestrolForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Colestrol do Alimento</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="alimentoForm.colestrolForm.$valid">
+
+				<label for="nome">Sódio</label> <input type="text" name="sodioForm"
+					class="form-control" ng-model="alimento.sodio" id="sodio"
+					placeholder="Coloque o valor de sódio" ng-required="true" />
+
+				<div ng-show="alimentoForm.sodioForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Sódio do Alimento</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="alimentoForm.sodioForm.$valid">
+
+				<label for="nome">Potassio</label> <input type="text"
+					name="potassioForm" class="form-control"
+					ng-model="alimento.potassio" id="potassio"
+					placeholder="Coloque o valor de potassio" ng-required="true" />
+
+				<div ng-show="alimentoForm.potassioForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Potassio do Alimento</p>
+				</div>
+
+			</div>
+
+			<div class="form-group" ng-show="alimentoForm.potassioForm.$valid">
+				<label for="nome">Carboidrato</label> <input type="text"
+					name="carboidratoForm" class="form-control"
+					ng-model="alimento.carboidrato" id="carboidrato"
+					placeholder="Coloque o valor de potassio" ng-required="true" />
+
+				<div ng-show="alimentoForm.carboidratoForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Carboidrato do Alimento</p>
+				</div>
+
+			</div>
+			<div class="form-group" ng-show="alimentoForm.carboidratoForm.$valid">
+				<label for="nome">Fibra</label> <input type="text" name="fibraForm"
+					class="form-control" ng-model="alimento.fibra" id="fibra"
+					placeholder="Coloque o valor de fibra" ng-required="true" />
+
+				<div ng-show="alimentoForm.fibraForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Fibra do Alimento</p>
+				</div>
+
+			</div>
+
+			<div class="form-group" ng-show="alimentoForm.fibraForm.$valid">
+				<label for="nome">Açucar</label> <input type="text"
+					name="acucarForm" class="form-control" ng-model="alimento.acucar"
+					id="acucar" placeholder="Coloque o valor de açucar"
+					ng-required="true" />
+
+				<div ng-show="alimentoForm.acucarForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique o Açucar do Alimento</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-show="alimentoForm.acucarForm.$valid">
+				<label for="nome">Proteina</label> <input type="text"
+					name="proteinaForm" class="form-control"
+					ng-model="alimento.proteina" id="proteina"
+					placeholder="Coloque o valor de proteína" ng-required="true" />
+
+				<div ng-show="alimentoForm.proteinaForm.$invalid "
+					class="alert alert-danger">
+					<p class="alertas">Por Favor Indique a Proteina do Alimento</p>
+				</div>
+			</div>
+
+			<button ng-disabled="alimentoForm.$invalid"
+				ng-click="createNewAlimento(alimento)" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+			</button>
+
+			<button type="button" class="btn btn-danger" ng-click="close()">
+				<i class="fa fa-times" aria-hidden="true"></i> Cancelar
+			</button>
+
+		</form>
+		</modal>
+
+		<!-- 	Modal Apagar Alimento -->
+		<modal visible="showModalApagar" id="modalApagar">
+
+		<form>
+			<div>
+				<div class="form-group">
+					<label id="Apagar"><h1>Alimento Excluido com Sucesso!</h1></label>
+				</div>
+
+			</div>
+			<button type="button" class="btn btn-success"
+				ng-click="closeApagar()">
+				<i class="fa fa-times" aria-hidden="true"></i> Ok
+			</button>
+		</form>
+		</modal>
+	</div>
+</body>
