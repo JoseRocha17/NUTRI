@@ -72,16 +72,6 @@ userControllers.controller('UserViewController', ['$scope', '$routeParams', 'Use
 }]);
 
 
-userControllers.controller('UserController', ['$scope', '$routeParams', 'ProfileService', '$location', function($scope, $routeParams,
-		ProfileService, $location) {
-	
-	$scope.profile = ProfileService.profile();
-	
-    $scope.editInscricao = function(email) {
-    	$location.path('/inscricoes/' + email);
-    };
-
-}]);
 
 userControllers.controller('UserUpdateController', function($scope, $routeParams, UserUpdateService, $location) {
 
