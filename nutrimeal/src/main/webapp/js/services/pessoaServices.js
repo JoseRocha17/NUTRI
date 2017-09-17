@@ -26,9 +26,3 @@ pessoaServices.factory('ProfileService', function ($resource) {
         profile: { method: 'GET' }
     })
 });
-
-pessoaServices.factory('ProfileInscritoService', function ($resource) {
-    return $resource('/ws/v1/auth/:id', {}, {
-        profileInscrito: { method: 'GET', params: {id: '@id'} }
-    })
-});
