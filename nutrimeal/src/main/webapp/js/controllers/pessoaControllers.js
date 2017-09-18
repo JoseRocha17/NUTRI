@@ -83,9 +83,6 @@ pessoaControllers.controller('PessoaUpdateController', function($scope, $routePa
 	
 	$scope.profile = ProfileService.profile();
 	
-    $scope.editInscricao = function(email) {
-    	$location.path('/inscricoes/' + email);
-    };
 
 }]);
 
