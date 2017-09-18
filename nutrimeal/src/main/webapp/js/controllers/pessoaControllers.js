@@ -77,6 +77,17 @@ pessoaControllers.controller('PessoaUpdateController', function($scope, $routePa
 
 
  });
+ 
+ pessoaControllers.controller('ProfileController', ['$scope', '$routeParams', 'ProfileService', '$location', function($scope, $routeParams,
+		ProfileService, $location) {
+	
+	$scope.profile = ProfileService.profile();
+	
+    $scope.editInscricao = function(email) {
+    	$location.path('/inscricoes/' + email);
+    };
+
+}]);
 
 
 pessoaControllers.directive("formatDate", function(){
